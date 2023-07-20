@@ -22,6 +22,7 @@
 	</beans:bean>
 	
 	<context:component-scan base-package="com.smart.home" />
+
 	<!-- email setting -->
 	<beans:bean id="mainSender"
 		class="org.springframework.mail.javamail.JavaMailSenderImpl">
@@ -40,7 +41,6 @@
 				<beans:prop key="mail.debug">true</beans:prop>
 			</beans:props>
 		</beans:property>
-	</beans:bean>
-	
+	</beans:bean>	
 	
 </beans:beans>
