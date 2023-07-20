@@ -15,5 +15,29 @@
 </ul>
 <button type="submit">로그인</button>
 </form>
+
+<c:if test="${logStatus=='Y'}">
+	<p><a href="#" onclick="memberUpdate()">회원정보수정</a></p>
+</c:if>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+<script>
+	function memberUpdate() {
+		let logId = '<%= session.getAttribute("logId")%>';
+		let form = document.createElement('form');
+		form.method = 'POST';
+		form.action = '${pageContext.request.contextPath}/yj/memberUpdateForm';
+		
+		let inputlogId = document.createElement("input");
+		inputlogId.type = 'hidden';
+		inputlogId.name = 'logId';
+		inputlogId.value = logId;
+		form.appendChild(inputlogId);
+		
+		document.body.appendChild(form);
+		form.submit();
+	}
+	
+	
+</script>
 </body>
 </html>

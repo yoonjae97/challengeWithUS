@@ -11,5 +11,8 @@
 </h1>
 
 <P>  The time on the server is ${serverTime}. </P>
+<c:if test="${logStatus=='Y'}">
+	<p><a onclick="memberUpdate()">회원정보수정</a></p>
+</c:if>
 </body>
 </html>

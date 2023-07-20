@@ -12,4 +12,8 @@ public interface MemberService {
 	public String dupChk(String memberId);
 	
 	public String findPwd(String memberId, String memberEmail);
+
+	public MemberDTO getMember(String logId);
+
+	public int memberUpdate(MemberDTO dto);
 }
