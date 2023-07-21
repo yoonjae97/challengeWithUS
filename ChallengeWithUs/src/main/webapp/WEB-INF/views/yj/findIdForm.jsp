@@ -10,8 +10,8 @@
 <body>
 <form method="post" action="${pageContext.request.contextPath}/yj/idSearchOk">
 <ul>
-	<li>이름<input type="text" name="MemberName" id="MemberName"/></li>
-	<li>이메일<input type="text" name="MemberEmail", id="MemberEmail"/></li>
+	<li>이름<input type="text" name="memberName" id="memberName"/></li>
+	<li>이메일<input type="text" name="memberEmail" id="memberEmail"/></li>
 </ul>
 <button type="submit">로그인</button>
 </form>

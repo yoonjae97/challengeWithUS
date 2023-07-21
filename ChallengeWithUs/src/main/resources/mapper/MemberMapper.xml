@@ -7,10 +7,10 @@
 		insert into Members(MemberId, MemberPwd, MemberAddr,
 		MemberEmail, MemberName, MemberTel, MemberBirth, MemberGender,
 		MemberGradeName)
-		values(#{MemberId}, #{MemberPwd}, #{MemberAddr},
-		#{MemberEmail}, #{MemberName},
-		#{MemberTel}, #{MemberBirth},
-		#{MemberGender}, 'new')
+		values(#{memberId}, #{memberPwd}, #{memberAddr},
+		#{memberEmail}, #{memberName},
+		#{memberTel}, #{memberBirth},
+		#{memberGender}, 'new')
 	</insert>
 
 	<select id="loginOk" resultType="com.smart.home.dto.MemberDTO">
@@ -44,13 +44,13 @@
 
 	<update id="memberUpdate">
 		update members set 
-		MemberPwd = #{MemberPwd},
-		MemberAddr = #{MemberAddr},
-		MemberEmail = #{MemberEmail},
-		MemberName = #{MemberName},
-		MemberTel = #{MemberTel},
-		MemberBirth = #{MemberBirth},
-		MemberGender = #{MemberGender}
-		where MemberId = #{MemberId}
+		MemberPwd = #{memberPwd},
+		MemberAddr = #{memberAddr},
+		MemberEmail = #{memberEmail},
+		MemberName = #{memberName},
+		MemberTel = #{memberTel},
+		MemberBirth = #{memberBirth},
+		MemberGender = #{memberGender}
+		where MemberId = #{memberId}
 	</update>
 </mapper>

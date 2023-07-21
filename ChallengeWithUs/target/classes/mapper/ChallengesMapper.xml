@@ -3,6 +3,49 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.smart.home.dao.ChallengesDAO">
-	<select id="ChallengesList" resultType="com.smart.home.dto.ChallengesDTO">
+	<select id="ChallengesList"
+		resultType="com.smart.home.dto.ChallengesDTO">
+
+		SELECT *
+		FROM (
+		SELECT chalno, chaltitle, chalcontent, chalfilename,
+		memberid
+		FROM challenges
+		WHERE chalstatus = '1'
+		<if test="searchWord!=null">
+			AND (${searchKey} LIKE CONCAT('%', #{searchWord,
+			jdbcType=VARCHAR},
+			'%'))
+		</if>
+		ORDER BY chalno DESC
+		)
+		WHERE <![CDATA[rownum <= ${nowPage * onePageRecord}]]>
 	</select>
+
+
+
+
+	<select id="ChallengesTotalRecord" resultType="int">
+		select count(chalno) cnt from challenges
+		<if test="searchWord!=null">
+			where ${searchKey} like '%${searchWord}%'
+		</if>
+	</select>
+
+	<select id="ChallengesListMore" resultType="com.smart.home.dto.ChallengesDTO">
+	<![CDATA[
+	SELECT *
+	FROM (
+		SELECT chalno, chaltitle, chalcontent,
+		chalfilename, memberid
+		FROM challenges
+		WHERE chalstatus = '1' AND chalno < ${lastNo}
+		ORDER BY chalno DESC
+	)
+	WHERE rownum <= 5
+	ORDER BY chalno DESC
+	]]>
+</select>
+
+
 </mapper>

@@ -7,16 +7,27 @@ import org.springframework.stereotype.Service;
 
 import com.smart.home.dao.ChallengesDAO;
 import com.smart.home.dto.ChallengesDTO;
+import com.smart.home.dto.ChallengesPagingDTO;
 
 @Service
 public class ChallengesServicesImpl implements ChallengesService {
 
 	@Autowired
 	ChallengesDAO dao;
-	
+
 	@Override
-	public List<ChallengesDTO> ChallengesList() {
-		return dao.ChallengesList();
+	public List<ChallengesDTO> ChallengesList(ChallengesPagingDTO pDTO) {
+		return dao.ChallengesList(pDTO);
+	}
+
+	@Override
+	public int ChallengesTotalRecord(ChallengesPagingDTO pDTO) {
+		return dao.ChallengesTotalRecord(pDTO);
+	}
+
+	@Override
+	public List<ChallengesDTO> ChallengesListMore(ChallengesPagingDTO pDTO) {
+		return dao.ChallengesListMore(pDTO);
 	}
 
 }

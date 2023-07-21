@@ -9,17 +9,17 @@
 <body>
 	<form method="post" action="<%=request.getContextPath() %>/yj/MemberUpdateOk">
         <ul>
-            <li>아이디<input type="text" name="MemberId" value="${dto.memberId}" /></li>
-            <li>비밀번호<input type="text" name="MemberPwd" value="${dto.memberPwd}" /></li>
+            <li>아이디<input type="text" name="memberId" value="${dto.memberId}" /></li>
+            <li>비밀번호<input type="text" name="memberPwd" value="${dto.memberPwd}" /></li>
             <li>성별
-                남<input type="radio" value="남" name="MemberGender" id="male" ${dto.memberGender == '남' ? 'checked' : ''}>
-                여<input type="radio" value="여" name="MemberGender" id="female" ${dto.memberGender == '여' ? 'checked' : ''}>
+                남<input type="radio" value="남" name="memberGender" id="male" ${dto.memberGender == '남' ? 'checked' : ''}>
+                여<input type="radio" value="여" name="memberGender" id="female" ${dto.memberGender == '여' ? 'checked' : ''}>
             </li>
-            <li>이름<input type="text" name="MemberName" value="${dto.memberName}" /></li>
-            <li>이메일<input type="text" name="MemberEmail" value="${dto.memberEmail}" /></li>
-            <li>연락처<input type="text" name="MemberTel" value="${dto.memberTel}" /></li>
-            <li>주소<input type="text" name="MemberAddr" value="${dto.memberAddr}" /></li>
-             <li>생년월일<input type="text" name="MemberBirth" value="${dto.memberBirth}" /></li>
+            <li>이름<input type="text" name="memberName" value="${dto.memberName}" /></li>
+            <li>이메일<input type="text" name="memberEmail" value="${dto.memberEmail}" /></li>
+            <li>연락처<input type="text" name="memberTel" value="${dto.memberTel}" /></li>
+            <li>주소<input type="text" name="memberAddr" value="${dto.memberAddr}" /></li>
+             <li>생년월일<input type="text" name="memberBirth" value="${dto.memberBirth}" /></li>
         </ul>
         <button type="submit">수정하기</button>
 </body>

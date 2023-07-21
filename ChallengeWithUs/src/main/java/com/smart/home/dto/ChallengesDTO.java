@@ -1,14 +1,15 @@
 package com.smart.home.dto;
 
+import lombok.Data;
+
+@Data
 public class ChallengesDTO {
-	private int ChalNo;
-	private String MemberId;
-	private String ChalTitle;
-	private String ChalContent;
-	private int ParticipantsCnt;
-	private int ChalFee;
-	private int ChalTotalFee;
-	private String ChalStartDate;
-	private String ChalEndDate;
-	private String ChalStatus;
+	private int chalNo;
+	private String chalTitle;
+	private String chalContent;
+	private String chalFilename;
+	private String memberId;
+		
+	
+	
 }

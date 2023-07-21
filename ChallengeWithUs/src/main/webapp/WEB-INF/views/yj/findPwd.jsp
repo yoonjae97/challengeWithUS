@@ -10,16 +10,16 @@
 <body>
 <form method="post">
 <ul>
-	<li>아이디<input type="text" name="MemberId" id="MemberId"/></li>
-	<li>이메일<input type="text" name="MemberEmail", id="MemberEmail"/></li>
+	<li>아이디<input type="text" name="memberId" id="memberId"/></li>
+	<li>이메일<input type="text" name="memberEmail" id="memberEmail"/></li>
 </ul>
 <button type="button" id="findIdBtn">로그인</button>
 </form>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
 <script>
 	$("#findIdBtn").on("click", function(){
-		let MemberId = document.getElementById("MemberId").value;
-		let MemberEmail = document.getElementById("MemberEmail").value;
+		let MemberId = document.getElementById("memberId").value;
+		let MemberEmail = document.getElementById("memberEmail").value;
 		if (MemberId == "" || MemberId == null) {
 			alert("아이디를 입력해주세요")
 			return false;

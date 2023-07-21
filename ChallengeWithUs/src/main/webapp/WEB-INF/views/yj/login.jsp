@@ -10,8 +10,8 @@
 <body>
 <form method="post" action="${pageContext.request.contextPath}/yj/loginOk">
 <ul>
-	<li>아이디<input type="text" name="MemberId" id="MemberId"/></li>
-	<li>비밀번호<input type="text" name="MemberPwd", id="MemberPwd"/></li>
+	<li>아이디<input type="text" name="memberId" id="memberId"/></li>
+	<li>비밀번호<input type="text" name="memberPwd", id="memberPwd"/></li>
 </ul>
 <button type="submit">로그인</button>
 </form>
