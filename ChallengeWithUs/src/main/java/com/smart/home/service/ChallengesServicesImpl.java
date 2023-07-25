@@ -30,4 +30,30 @@ public class ChallengesServicesImpl implements ChallengesService {
 		return dao.ChallengesListMore(pDTO);
 	}
 
+	@Override
+	public int ChallengeInsert(ChallengesDTO dto) {
+		return dao.ChallengeInsert(dto);
+	}
+
+	@Override
+	public ChallengesDTO ChallengeSelect(int chalNo) {
+		return dao.ChallengeSelect(chalNo);
+	}
+
+	@Override
+	public String ChallengeFileSelect(int chalNo) {
+		return dao.ChallengeFileSelect(chalNo);
+	}
+
+	@Override
+	public int ChallengeUpdate(ChallengesDTO dto) {
+		return dao.ChallengeUpdate(dto);
+	}
+
+	@Override
+	public int ChallengeDelete(int chalNo) {
+		return dao.ChallengeDelete(chalNo);
+	}
+
+
 }

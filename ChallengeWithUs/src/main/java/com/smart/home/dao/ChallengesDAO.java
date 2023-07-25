@@ -11,4 +11,14 @@ public interface ChallengesDAO {
 	public int ChallengesTotalRecord(ChallengesPagingDTO pDTO);
 	
 	public List<ChallengesDTO> ChallengesListMore(ChallengesPagingDTO pDTO);
+
+	public int ChallengeInsert(ChallengesDTO dto);
+	
+	public ChallengesDTO ChallengeSelect(int chalNo);
+
+	public String ChallengeFileSelect(int chalNo);
+
+	public int ChallengeUpdate(ChallengesDTO dto);
+	
+	public int ChallengeDelete(int chalNo);
 }

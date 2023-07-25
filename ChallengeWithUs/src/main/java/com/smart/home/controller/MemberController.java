@@ -61,11 +61,11 @@ public class MemberController {
 
 	// 로그인 -> 완료
 	@PostMapping("/loginOk")
-	public ModelAndView loginOk(String MemberId, String MemberPwd, HttpSession session) {
-		System.out.println(MemberId + MemberPwd + "hi");
+	public ModelAndView loginOk(String memberId, String memberPwd, HttpSession session) {
+		System.out.println(memberId + memberPwd + "hi");
 		ModelAndView mav = new ModelAndView();
 		try {
-			MemberDTO dto = service.loginOk(MemberId, MemberPwd);
+			MemberDTO dto = service.loginOk(memberId, memberPwd);
 			session.setAttribute("logId", dto.getMemberId());
 			session.setAttribute("logName", dto.getMemberName());
 			session.setAttribute("logStatus", "Y");
@@ -95,12 +95,12 @@ public class MemberController {
 
 	// 아이디 찾아서 아이디만 반환 -> 완료
 	@PostMapping("/idSearchOk")
-	public ModelAndView findId(String MemberName, String MemberEmail) {
+	public ModelAndView findId(String memberName, String memberEmail) {
 		String memberId = null;
 		ModelAndView mav = new ModelAndView();
 
 		try {
-			memberId = service.findId(MemberName, MemberEmail);
+			memberId = service.findId(memberName, memberEmail);
 			System.out.println(memberId);
 			mav.addObject("MemberId", memberId);
 			mav.setViewName("yj/returnMemberId");
@@ -142,11 +142,11 @@ public class MemberController {
 	// 비밀번호 찾기 -> 완료
 	@PostMapping("/findPwd")
 	@ResponseBody
-	public int findPwd(String MemberId, String MemberEmail) {
+	public int findPwd(String memberId, String memberEmail) {
 		String pwd = null;
 		int result = 0;
 		try {
-			pwd = service.findPwd(MemberId, MemberEmail);
+			pwd = service.findPwd(memberId, memberEmail);
 			if (pwd == null) {
 				return result;
 			}
@@ -154,7 +154,7 @@ public class MemberController {
 			e.printStackTrace();
 		}
 		String setFrom = "winterer601@naver.com";
-		String toMail = MemberEmail;
+		String toMail = memberEmail;
 		String title = "비밀번호 찾기 이메일 입니다.";
 		String content = "홈페이지를 방문해주셔서 감사합니다." + "<br><br>" + "회원님의 비밀번호는 " + pwd + "입니다.";
 		try {

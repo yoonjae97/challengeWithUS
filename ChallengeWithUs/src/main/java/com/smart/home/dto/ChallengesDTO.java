@@ -9,7 +9,10 @@ public class ChallengesDTO {
 	private String chalContent;
 	private String chalFilename;
 	private String memberId;
-		
+	private int chalFee;
+	private String chalstartDate;
+	private String chalendDate;
+	private int participantsCnt;
 	
 	
 }
