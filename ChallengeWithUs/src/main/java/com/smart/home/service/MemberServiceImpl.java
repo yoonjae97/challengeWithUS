@@ -38,6 +38,16 @@ public class MemberServiceImpl implements MemberService {
 	public String findPwd(String memberId, String memberEmail) {
 		return dao.findPwd(memberId, memberEmail);
 	}
+
+	@Override
+	public MemberDTO getMember(String logId) {
+		return dao.getMember(logId);
+	}
+
+	@Override
+	public int memberUpdate(MemberDTO dto) {
+		return dao.memberUpdate(dto);
+	}
 	
 }
 

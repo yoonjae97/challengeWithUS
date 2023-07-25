@@ -8,7 +8,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<c:if test="${MemberId != null}">${MemberId}</c:if>
-	<c:if test="${MemberId == null}">아이디 없음</c:if>
+	<c:if test="${memberId != null}">${memberId}</c:if>
+	<c:if test="${memberId == null}">아이디 없음</c:if>
 </body>
 </html>
