@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.smart.home.mapper.AchievementMapper">
+
+    <!-- 각 챌린지에 대한 달성률 정보를 가져오는 쿼리 -->
+    <select id="getMyAchievements" parameterType="string" resultType="com.smart.home.dto.MemberAchievementDTO">
+        SELECT AchievementRate
+        FROM MemberAchievement
+        WHERE MemberId = #{memberId}
+    </select>
+    
+	<!-- 참가중인 챌린지 중 달성률이 85%이상인 챌린지의 갯수를 카운트 해주는 쿼리  -->
+	<!-- 챌린지 달성횟수 산정 -->
+	<select id="getMyAchievementCnt" parameterType="string" >
+		SELECT mem.memberid, mem.membergradename,
+		   (SELECT COUNT(*)
+		    FROM MEMBERACHIEVEMENT a
+		    JOIN challenges c ON a.chalno = c.chalno
+		    WHERE a.memberId = mem.memberId
+		      AND c.CHALENDDATE > TO_CHAR(SYSDATE, 'YYYYMMDD')
+		      AND a.achievementrate > 85
+		   ) AS achievement_count
+		FROM members mem;
+	</select>
+</mapper>
