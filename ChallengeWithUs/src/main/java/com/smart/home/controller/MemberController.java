@@ -17,7 +17,7 @@ import com.smart.home.dto.MemberDTO;
 import com.smart.home.service.MemberService;
 
 @Controller
-@RequestMapping("/register")
+@RequestMapping("/yj")
 public class MemberController {
 
 	@Autowired
@@ -27,36 +27,36 @@ public class MemberController {
 	private JavaMailSender mailSender;
 
 	// 회원가입 폼으로 이동 -> 완료
-	@GetMapping("/registerJoin")
+	@GetMapping("/MemberRegForm")
 	public String MemberRegForm() {
-		return "register/registerJoin";
+		return "yj/MemberRegForm";
 	}
 
 	// 회원가입 확인 -> 완료
-	@PostMapping("registerJoinOk")
-	@ResponseBody
-	public String MemberRegOk(MemberDTO dto) {
+	@PostMapping("MemberRegOk")
+	public ModelAndView MemberRegOk(MemberDTO dto) {
 		int result = 0;
-		ModelAndView mav = new ModelAndView();
-		dto.setMemberAddr(dto.getZipcode(), dto.getZipcodeSub(), dto.getStreetAdr(), dto.getDetailAdr());
 		System.out.println(dto);
 		try {
 			result = service.MemberInsert(dto);
-
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println("회원가입실패" + e.getMessage());		}	
-		if (result > 0) {
-			return "success";
-		} else {
-			return "fail";
+			System.out.println("회원가입실패" + e.getMessage());
 		}
+
+		ModelAndView mav = new ModelAndView();
+		if (result > 0) {
+			mav.setViewName("home");
+		} else {
+			mav.setViewName("yj/MemberResult");
+		}
+		return mav;
 	}
 
 	// 로그인 화면으로 이동 -> 완료
 	@GetMapping("/login")
 	public String login() {
-		return "register/login";
+		return "yj/login";
 	}
 
 	// 로그인 -> 완료
@@ -113,7 +113,7 @@ public class MemberController {
 	}
 
 	// 아이디 중복 체크 -> 완료
-	@GetMapping("/doubleChk")
+	@GetMapping("/dupChk")
 	@ResponseBody
 	public Integer dupChk(String id) {
 		Integer result = 0;
