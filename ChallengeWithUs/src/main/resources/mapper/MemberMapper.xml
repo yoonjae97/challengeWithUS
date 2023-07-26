@@ -21,7 +21,7 @@
 
 	<select id="findId" resultType="String">
 		select memberid from members
-		where memberid=#{param1} and memberEmail=#{param2}
+		where memberName=#{param1} and memberEmail=#{param2}
 	</select>
 
 	<select id="dupChk" resultType="String">

@@ -56,25 +56,25 @@ public class MemberController {
 	// 로그인 화면으로 이동 -> 완료
 	@GetMapping("/login")
 	public String login() {
-		return "register/login";
+		return "register/LoginPage";
 	}
 
 	// 로그인 -> 완료
 	@PostMapping("/loginOk")
-	public ModelAndView loginOk(String memberId, String memberPwd, HttpSession session) {
+	@ResponseBody
+	public String loginOk(String memberId, String memberPwd, HttpSession session) {
 		System.out.println(memberId + memberPwd + "hi");
-		ModelAndView mav = new ModelAndView();
+	
 		try {
 			MemberDTO dto = service.loginOk(memberId, memberPwd);
 			session.setAttribute("logId", dto.getMemberId());
 			session.setAttribute("logName", dto.getMemberName());
 			session.setAttribute("logStatus", "Y");
-			mav.setViewName("home");
+			return "success";
 		} catch (Exception e) {
 			e.printStackTrace();
-			mav.setViewName("redirect:login");
+			return "failure";
 		}
-		return mav;
 
 	}
 
@@ -90,11 +90,11 @@ public class MemberController {
 	// 아이디 찾기 화면으로 이동 -> 완료
 	@GetMapping("/findIdForm")
 	public String findIdForm() {
-		return "yj/findIdForm";
+		return "register/FindID";
 	}
 
 	// 아이디 찾아서 아이디만 반환 -> 완료
-	@PostMapping("/idSearchOk")
+	@PostMapping("/findId")
 	public ModelAndView findId(String memberName, String memberEmail) {
 		String memberId = null;
 		ModelAndView mav = new ModelAndView();
@@ -102,14 +102,20 @@ public class MemberController {
 		try {
 			memberId = service.findId(memberName, memberEmail);
 			System.out.println(memberId);
-			mav.addObject("MemberId", memberId);
-			mav.setViewName("yj/returnMemberId");
-			return mav;
+
 		} catch (Exception e) {
 			e.printStackTrace();
-			mav.setViewName("yj/returnMemberId");
-			return mav;
 		}
+		
+		if (memberId == null | memberId == "") {
+			mav.addObject("message", "입력하신 이름 혹은 이메일이 일치하지 않습니다.");
+			mav.setViewName("register/FindID");
+		} else {
+			mav.addObject("MemberId", memberId);
+			mav.setViewName("yj/returnMemberId");
+		}
+
+		return mav;
 	}
 
 	// 아이디 중복 체크 -> 완료
@@ -134,9 +140,9 @@ public class MemberController {
 	}
 
 	// 비밀번호 찾기 페이지 이동 -> 완료
-	@GetMapping("/findPwdForm")
+	@GetMapping("/pwSearch")
 	public String findPwdForm() {
-		return "yj/findPwd";
+		return "register/pwSearch";
 	}
 
 	// 비밀번호 찾기 -> 완료
@@ -173,7 +179,7 @@ public class MemberController {
 		return result;
 	}
 
-	// 회원수정 폼으로 이동
+	// 회원수정 폼으로 이동 ->
 	@PostMapping("/memberUpdateForm")
 	public ModelAndView memeberUpdateForm(String logId) {
 		ModelAndView mav = new ModelAndView();
@@ -189,7 +195,7 @@ public class MemberController {
 		return mav;
 	}
 
-	// 회원가입 확인 -> 완료
+	// 회원정보 수정 -> 
 	@PostMapping("MemberUpdateOk")
 	public ModelAndView MemberUpdateOk(MemberDTO dto) {
 		int result = 0;

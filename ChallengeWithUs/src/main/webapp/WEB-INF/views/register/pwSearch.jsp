@@ -182,19 +182,57 @@
 </style>
 </head>
 <body>
+<form id="findIdForm">
 	<div class="pwSearchWrap">
 		<div class="pwSearchOverWrap">
 			<div class="check">
-				<button class="checkText">확인</button>
+				<button class="checkText" type="submit" id="findIdBtn">확인</button>
 			</div>
-			<input type="email" class="email-fill" placeholder="이메일을 입력해주세요" />
-			<input type="text" class="username-fill" placeholder="이름을 입력해주세요" />
+			<input type="email" class="email-fill" placeholder="이메일을 입력해주세요" name="memberEmail" id="memberEmail"/>
+			<input type="text" class="username-fill" placeholder="아이디를 입력해주세요" name="memberId" id="memberId"/>
 			<div class="element-2">이메일</div>
-			<div class="element-3">이름</div>
+			<div class="element-3">아이디</div>
 			<div class="element-4" onclick="location='FindID'">아이디 찾기</div>
 			<div class="element-5">회원가입시 등록한 정보를 입력해주세요</div>
 			<div class="element-6">아이디가 기억나지 않는다면?</div>
 		</div>
 		<div class="element">비밀번호 찾기</div>
 	</div>
+	</form>
+	<script>
+	$("#findIdBtn").on("click", function(event){
+		event.preventDefault();
+		var formData = $("#findIdForm").serialize();
+		let MemberId = document.getElementById("memberId").value;
+		let MemberEmail = document.getElementById("memberEmail").value;
+		if (MemberId == "" || MemberId == null) {
+			alert("아이디를 입력해주세요")
+			return false;
+		}
+		if (MemberEmail == "" || MemberEmail == null) {
+			alert("이메일을 입력해주세요")
+			return false;
+		}
+		console.log(MemberId, MemberEmail)
+		
+		$.ajax({
+			data:formData,
+			method:'post',
+			url:'${pageContext.request.contextPath}/register/findPwd',
+			success:function(result){
+				if (result == 0) {
+					alert("입력하신 정보와 일치하는 회원이 없습니다")
+				} else {
+					alert("이메일로 비밀번호가 전송되었습니다.")
+					window.location.href = "${pageContext.request.contextPath}/";
+				}
+			},
+			error:function(e){
+				alert("이메일 전송 실패")
+				console.log(e.responseText);
+			}
+		})
+		
+	})
+</script>
 </body>

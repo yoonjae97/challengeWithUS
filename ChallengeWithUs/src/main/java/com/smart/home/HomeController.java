@@ -7,12 +7,17 @@ import java.util.Locale;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.smart.home.dto.ChallengesDTO;
+import com.smart.home.dto.ChallengesPagingDTO;
+import com.smart.home.service.ChallengesService;
 
 
 
@@ -22,25 +27,42 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class HomeController {
 	
-	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
+	@Autowired
+	ChallengesService service;
 	
-	/**
-	 * Simply selects the home view to render by returning its name.
-	 */
-	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(Locale locale, Model model) {
-		logger.info("Welcome home! The client locale is {}.", locale);
+//	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
+//	
+//	/**
+//	 * Simply selects the home view to render by returning its name.
+//	 */
+//	@RequestMapping(value = "/", method = RequestMethod.GET)
+//	public String home(Locale locale, Model model) {
+//		logger.info("Welcome home! The client locale is {}.", locale);
+//		
+//		Date date = new Date();
+//		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
+//		
+//		String formattedDate = dateFormat.format(date);
+//		
+//		model.addAttribute("serverTime", formattedDate );
+//		
+//		return "home";
+//	}
+	
+	// 챌린지 리스트 조회
+	@GetMapping("")
+	public ModelAndView ChallengesList(ChallengesPagingDTO pDTO) {
+
+		pDTO.setTotalRecord(service.ChallengesTotalRecord(pDTO));
+		List<ChallengesDTO> list = service.ChallengesList(pDTO);
 		
-		Date date = new Date();
-		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
-		
-		String formattedDate = dateFormat.format(date);
-		
-		model.addAttribute("serverTime", formattedDate );
-		
-		return "home";
+		ModelAndView mav = new ModelAndView();
+
+		mav.addObject("list", list);
+		mav.addObject("pDTO", pDTO);
+		mav.setViewName("home");
+		return mav;
 	}
-	
 	
 	@GetMapping("/challenge")
 	public ModelAndView challenge() {

@@ -27,11 +27,9 @@ public class MemberServiceImpl implements MemberService {
 		return dao.dupChk(id);
 	}
 
-
-
 	@Override
 	public String findId(String memberName, String memberEmail) {
-		return dao.findPwd(memberName, memberEmail);
+		return dao.findId(memberName, memberEmail);
 	}
 
 	@Override

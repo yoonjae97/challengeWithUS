@@ -65,7 +65,7 @@
 		      // 서버에서 보낸 결과를 처리하는 부분
 		      if (result == "success") {
 		        alert("회원가입이 성공적으로 완료되었습니다!");
-		        window.location.href = "${pageContext.request.contextPath}/home";
+		        window.location.href = "${pageContext.request.contextPath}/";
 		      } else {
 		        alert("회원가입 실패");
 		      }
