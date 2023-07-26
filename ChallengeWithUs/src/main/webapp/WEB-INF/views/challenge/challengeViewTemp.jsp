@@ -4,7 +4,13 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/inc/viewsCss/challengeView.css" type="text/css"/>
-
+<div>
+		<c:if test="${logId == dto.memberId}">
+			<a
+				href="/home/ChallengeEdit?chalNo=${dto.chalNo}&nowPage=${pDTO.nowPage}">수정</a>
+			<a href="javascript:delChk()" id="ChallengeDelBtn">삭제</a>
+		</c:if>
+	</div>
 <p>
   <div class="Wrapper">
   
@@ -86,14 +92,20 @@ $("#challengePart").on("click", function(){
 		url:"${pageContext.request.contextPath}/challengePart",
 		method:"post",
 		data:{
-			"chalNo":${dto.chalNo}
+			"chalNo":${dto.chalNo},
+			"chalFee":${dto.chalFee }
 		},
 		success:function(result) {
-			if (result==1) {
-				alert("챌린지 참여가 완료되었습니다!")
-			} else if (result == 0){
+			if (result.result==1) {
+				alert("챌린지 참여가 완료되었습니다!");
+				let participantsCnt = result.participantsCnt;
+				$(".participants-count").text(participantsCnt + "명");
+				
+			} else if (result.result == 0){
 				alert("이미 참여중인 챌린지 입니다.");	
-			} 
+			} else if (result.result == 3) {
+				alert("예치금이 부족합니다!");				
+			}
 			else {
 				alert("로그인 후 참여가 가능합니다.");
 				window.location.href= "${pageContext.request.contextPath}/register/login";

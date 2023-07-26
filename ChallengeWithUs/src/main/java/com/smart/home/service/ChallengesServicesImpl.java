@@ -65,5 +65,28 @@ public class ChallengesServicesImpl implements ChallengesService {
 		return dao.ChallengePart(chalNo, logId);
 	}
 
+	@Override
+	public void UpdateFeePartCnt(int chalNo) {
+		dao.UpdateFeePartCnt(chalNo);
+		
+	}
+
+	@Override
+	public int GetParticipantsCnt(int chalNo) {
+		return dao.GetParticipantsCnt(chalNo);
+	}
+
+	@Override
+	public int GetDeposit(String logId) {
+		return dao.GetDeposit(logId);
+	}
+
+	@Override
+	public void UpdateDeposit(String logId, int memDeposit) {
+		dao.UpdateDeposit(logId, memDeposit);
+		
+	}
+
+	
 
 }

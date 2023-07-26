@@ -14,17 +14,50 @@
 
 <div class="challenge-container">
 <div class="challenge-box">
-<form method="post" action=" ">
+<form id="challengeForm">
 		<ul class="WriteBox">
-			<li ><span>제목</span> <input class="box-title" type="text" name="" id=""/></li>
-			<li ><span>내용</span> <input class="box-title" type="text" name="" id=""/></li>
+			<li ><span>제목</span> <input class="box-title" type="text" name="chalTitle" id=""/></li>
+			<li ><span>내용</span> <input class="box-title" type="text" name="chalContent" id=""/></li>
+			<li ><span>대표 이미지</span> <input class="box-title" type="file" name="challengeFilename" id=""/></li>
 			<li ><span>대표 이미지</span> <button class="box-botton-text">이미지 선택</button> </li>
-			<li ><span>시작</span> <input class="box-title" type="text" name="" id=""/></li>
-			<li ><span>종료 </span><input class="box-title" type="text" name="" id=""/></li>
-			<li ><span>비용 </span><input class="box-title" type="text" name="" id=""/> 
+			<li ><span>시작</span> <input class="box-title" type="date" name="chalstartDate" id=""/></li>
+			<li ><span>종료 </span><input class="box-title" type="date" name="chalendDate" id=""/></li>
+			<li ><span>비용 </span><input class="box-title" type="text" name="chalFee" id=""/> 
 			<li><button class="box-botton-text">등록</button></li>			
 		</ul>
 	</form>
 </div>
 </div>
 </div>
+<script>
+		$(document).ready(function() {
+			// 폼 제출 시 Ajax 사용
+			$('#challengeForm').submit(function(event) {
+				event.preventDefault();
+				var formData = new FormData(this);
+
+				$.ajax({
+					url : '${pageContext.request.contextPath}/ChallengeWriteOk',
+					type : 'post',
+					data : formData,
+					processData : false,
+					contentType : false,
+					success : function(response) {
+						// 작성 성공 시
+						if (response == "success") {
+							alert("작성 성공");
+							window.location.replace("${pageContext.request.contextPath}/");
+						}
+						// 작성 실패 시
+						else if (response == "failure") {
+							alert("작성 실패");
+							window.location.reload();
+						}
+					},
+					error : function(e) {
+						console.log(e.responseText);
+					}
+				});
+			});
+		});
+	</script>
