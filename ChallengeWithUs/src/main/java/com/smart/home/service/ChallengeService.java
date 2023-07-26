@@ -7,11 +7,6 @@ import com.smart.home.dto.ChallengeDetailDTO;
 import com.smart.home.dto.ChallengeListDTO;
 
 public interface ChallengeService {
-	//챌린지 등록(구현X)
-	//public int createChallenge(ChallengeDTO cDTO);
-
-	// 챌린지 삭제(구현X)
-	//public void deleteChallenge(int chalNo);
 	
 	// 로그인 사용자의 모든 챌린지 조회(챌린지 달성률, 챌린지명, 챌린지 파일명, 챌린지 내용, 챌린지 성공여부)
 	public List<ChallengeListDTO> getAllChallenges(String memberId);

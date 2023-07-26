@@ -16,4 +16,14 @@ public class MemberAchievementDTO {
     // 챌린지 달성횟수
     private int achievement_count;
     
+    //================ 회원 등급 관련 =================
+    
+    // 회원등급이름(Basic 또는 Leader)
+ 	private String memberGradeName;
+ 	
+ 	// 회원등급 상세설명
+    private String memberGradeDesc;
+    
+    // 회원등급 조건
+    private String memberGradeRequirement;
 }

@@ -16,5 +16,6 @@ public interface MemberAchievementService {
 	
 	// 로그인 되어있는 사용자의 회원등급 
 	public String getmyGrade(String memberId);
+
 	
 }

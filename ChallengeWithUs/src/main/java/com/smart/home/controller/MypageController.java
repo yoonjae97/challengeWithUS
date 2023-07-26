@@ -13,13 +13,13 @@ import com.smart.home.dto.QaDTO;
 
 import lombok.Data;
 
+import com.smart.home.service.BoardService;
 import com.smart.home.service.ChallengeService;
 import com.smart.home.service.DepositService;
 import com.smart.home.service.MemberAchievementService;
 import com.smart.home.service.MemberAchievementServiceImpl;
 import com.smart.home.service.MemberGradeServiceImpl;
 import com.smart.home.service.MemberService;
-import com.smart.home.service.QaService;
 
 import jdk.nashorn.internal.ir.RuntimeNode.Request;
 
@@ -30,6 +30,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -54,7 +55,7 @@ public class MypageController {
     private MemberAchievementService MemAchiservice;
     
     @Autowired
-    private QaService Qaservice;
+    private BoardService Boservice;
     
     // 세션에서 ID 받아오는 메소드 따로 정의
     // gmifs = Get Member Id From Session
@@ -125,28 +126,31 @@ public class MypageController {
         return mav;
     }
     
+   
     // 회원 정보 수정 페이지로 이동
-    @PostMapping("/my")
-    public ModelAndView getMyMemberInfo(HttpServletRequest request) {
-    	
-    	// 1. 로그인 사용자의 아이디 (세션에서 받아오므로 따로 받아올 필요가 없다.)
-    	String memberId = gmifs(request);;
-    	
-    	// 2. 로그인 사용자의 정보를 받아 온다. 
-        MemberDTO member = Memservice.getMyMemberInfo(memberId);
-    	
+    @PatchMapping("/myInfo")
+    public ModelAndView updateMyMemberInfo(@RequestBody MemberDTO member, HttpServletRequest request) {
+        // 로그인 사용자의 아이디 (세션에서 받아오므로 따로 받아올 필요가 없다.)
+    	String memberId = gmifs(request);
+    	member.setMemberId(memberId);
+
+        // 로그인 사용자의 정보를 업데이트한다. 
+        Memservice.memberUpdate(member);
+        
         // Model And View
         ModelAndView mav = new ModelAndView();
         
-        //3. 회원 정보를 Model And View에 추가
+        // 회원 정보를 Model And View에 추가
         mav.addObject("member", member);
         
         mav.setViewName("Mypage/MyInfo");
         
         return mav;
+    }
+
         
 
-    }
+    
     
     // 고객 문의 페이지로 이동 
     @GetMapping("/Qa")
@@ -155,7 +159,7 @@ public class MypageController {
     	String memberId = gmifs(request);;
         
         // 2. 로그인 사용자의 문의 내역을 받아옵니다.
-        List<QaDTO> myQaList = Qaservice.getMyQaList(memberId);
+        List<QaDTO> myQaList = Boservice.getMyQaList(memberId);
         
         // Model And view
         ModelAndView mav = new ModelAndView();
