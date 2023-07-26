@@ -55,5 +55,15 @@ public class ChallengesServicesImpl implements ChallengesService {
 		return dao.ChallengeDelete(chalNo);
 	}
 
+	@Override
+	public int ChallengePartCheck(int chalNo, String logId) {
+		return dao.ChallengePartCheck(chalNo, logId);
+	}
+
+	@Override
+	public int ChallengePart(int chalNo, String logId) {
+		return dao.ChallengePart(chalNo, logId);
+	}
+
 
 }

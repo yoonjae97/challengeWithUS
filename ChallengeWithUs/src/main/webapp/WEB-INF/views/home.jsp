@@ -75,7 +75,7 @@
 				<div class="Title">${dto.chalTitle }</div>
 				<div class="Description">${dto.chalContent }</div>
 				<div class="Button">
-					<button><a href='/home/yj/ChallengeView?chalNo=${dto.chalNo}&nowPage=${pDTO.nowPage}<c:if test="${pDTO.searchWord!=null}">
+					<button><a href='/home/ChallengeView?chalNo=${dto.chalNo}&nowPage=${pDTO.nowPage}<c:if test="${pDTO.searchWord!=null}">
 				&searchKey=${pDTO.searchKey}&searchWord=${pDTO.searchWord}</c:if>'>GO</a></button>
 				</div>
 			</div>

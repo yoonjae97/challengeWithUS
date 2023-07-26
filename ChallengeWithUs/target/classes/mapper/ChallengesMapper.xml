@@ -78,4 +78,14 @@
 		delete from challenges
 		where chalNo=${param1}
 	</delete>
+	
+	<select id="ChallengePartCheck" resultType="int">
+		select count(*) from MemberAchievement
+		where chalno=${param1} and memberid=#{param2}
+	</select>
+	
+	<insert id="ChallengePart">
+		insert into MemberAchievement
+		values(MemberAchievementNo_seq.nextval, #{param2}, ${param1}, 0)
+	</insert>
 </mapper>
