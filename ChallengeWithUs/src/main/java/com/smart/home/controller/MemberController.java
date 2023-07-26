@@ -26,13 +26,13 @@ public class MemberController {
 	@Autowired
 	private JavaMailSender mailSender;
 
-	// íšŒì›ê°€ì… í¼ìœ¼ë¡œ ì´ë™ -> ì™„ë£Œ
+	// È¸¿ø°¡ÀÔ ÆûÀ¸·Î ÀÌµ¿ -> ¿Ï·á
 	@GetMapping("/registerJoin")
 	public String MemberRegForm() {
 		return "register/registerJoin";
 	}
 
-	// íšŒì›ê°€ì… í™•ì¸ -> ì™„ë£Œ
+	// È¸¿ø°¡ÀÔ È®ÀÎ -> ¿Ï·á
 	@PostMapping("registerJoinOk")
 	@ResponseBody
 	public String MemberRegOk(MemberDTO dto) {
@@ -45,7 +45,7 @@ public class MemberController {
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println("íšŒì›ê°€ì…ì‹¤íŒ¨" + e.getMessage());		}	
+			System.out.println("È¸¿ø°¡ÀÔ½ÇÆĞ" + e.getMessage());		}	
 		if (result > 0) {
 			return "success";
 		} else {
@@ -53,13 +53,13 @@ public class MemberController {
 		}
 	}
 
-	// ë¡œê·¸ì¸ í™”ë©´ìœ¼ë¡œ ì´ë™ -> ì™„ë£Œ
+	// ·Î±×ÀÎ È­¸éÀ¸·Î ÀÌµ¿ -> ¿Ï·á
 	@GetMapping("/login")
 	public String login() {
 		return "register/LoginPage";
 	}
 
-	// ë¡œê·¸ì¸ -> ì™„ë£Œ
+	// ·Î±×ÀÎ -> ¿Ï·á
 	@PostMapping("/loginOk")
 	@ResponseBody
 	public String loginOk(String memberId, String memberPwd, HttpSession session) {
@@ -78,7 +78,7 @@ public class MemberController {
 
 	}
 
-	// ë¡œê·¸ì•„ì›ƒ -> ì™„ë£Œ
+	// ·Î±×¾Æ¿ô -> ¿Ï·á
 	@GetMapping("/logout")
 	public ModelAndView logout(HttpSession session) {
 		session.invalidate();
@@ -87,13 +87,13 @@ public class MemberController {
 		return mav;
 	}
 
-	// ì•„ì´ë”” ì°¾ê¸° í™”ë©´ìœ¼ë¡œ ì´ë™ -> ì™„ë£Œ
+	// ¾ÆÀÌµğ Ã£±â È­¸éÀ¸·Î ÀÌµ¿ -> ¿Ï·á
 	@GetMapping("/findIdForm")
 	public String findIdForm() {
 		return "register/FindID";
 	}
 
-	// ì•„ì´ë”” ì°¾ì•„ì„œ ì•„ì´ë””ë§Œ ë°˜í™˜ -> ì™„ë£Œ
+	// ¾ÆÀÌµğ Ã£¾Æ¼­ ¾ÆÀÌµğ¸¸ ¹İÈ¯ -> ¿Ï·á
 	@PostMapping("/findId")
 	public ModelAndView findId(String memberName, String memberEmail) {
 		String memberId = null;
@@ -108,7 +108,7 @@ public class MemberController {
 		}
 		
 		if (memberId == null | memberId == "") {
-			mav.addObject("message", "ì…ë ¥í•˜ì‹  ì´ë¦„ í˜¹ì€ ì´ë©”ì¼ì´ ì¼ì¹˜í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.");
+			mav.addObject("message", "ÀÔ·ÂÇÏ½Å ÀÌ¸§ È¤Àº ÀÌ¸ŞÀÏÀÌ ÀÏÄ¡ÇÏÁö ¾Ê½À´Ï´Ù.");
 			mav.setViewName("register/FindID");
 		} else {
 			mav.addObject("MemberId", memberId);
@@ -118,7 +118,7 @@ public class MemberController {
 		return mav;
 	}
 
-	// ì•„ì´ë”” ì¤‘ë³µ ì²´í¬ -> ì™„ë£Œ
+	// ¾ÆÀÌµğ Áßº¹ Ã¼Å© -> ¿Ï·á
 	@GetMapping("/doubleChk")
 	@ResponseBody
 	public Integer dupChk(String id) {
@@ -139,13 +139,13 @@ public class MemberController {
 		return result;
 	}
 
-	// ë¹„ë°€ë²ˆí˜¸ ì°¾ê¸° í˜ì´ì§€ ì´ë™ -> ì™„ë£Œ
+	// ºñ¹Ğ¹øÈ£ Ã£±â ÆäÀÌÁö ÀÌµ¿ -> ¿Ï·á
 	@GetMapping("/pwSearch")
 	public String findPwdForm() {
 		return "register/pwSearch";
 	}
 
-	// ë¹„ë°€ë²ˆí˜¸ ì°¾ê¸° -> ì™„ë£Œ
+	// ºñ¹Ğ¹øÈ£ Ã£±â -> ¿Ï·á
 	@PostMapping("/findPwd")
 	@ResponseBody
 	public int findPwd(String memberId, String memberEmail) {
@@ -161,8 +161,8 @@ public class MemberController {
 		}
 		String setFrom = "winterer601@naver.com";
 		String toMail = memberEmail;
-		String title = "ë¹„ë°€ë²ˆí˜¸ ì°¾ê¸° ì´ë©”ì¼ ì…ë‹ˆë‹¤.";
-		String content = "í™ˆí˜ì´ì§€ë¥¼ ë°©ë¬¸í•´ì£¼ì…”ì„œ ê°ì‚¬í•©ë‹ˆë‹¤." + "<br><br>" + "íšŒì›ë‹˜ì˜ ë¹„ë°€ë²ˆí˜¸ëŠ” " + pwd + "ì…ë‹ˆë‹¤.";
+		String title = "ºñ¹Ğ¹øÈ£ Ã£±â ÀÌ¸ŞÀÏ ÀÔ´Ï´Ù.";
+		String content = "È¨ÆäÀÌÁö¸¦ ¹æ¹®ÇØÁÖ¼Å¼­ °¨»çÇÕ´Ï´Ù." + "<br><br>" + "È¸¿ø´ÔÀÇ ºñ¹Ğ¹øÈ£´Â " + pwd + "ÀÔ´Ï´Ù.";
 		try {
 			MimeMessage message = mailSender.createMimeMessage();
 			MimeMessageHelper helper = new MimeMessageHelper(message, true, "utf-8");
@@ -179,7 +179,7 @@ public class MemberController {
 		return result;
 	}
 
-	// íšŒì›ìˆ˜ì • í¼ìœ¼ë¡œ ì´ë™ ->
+	// È¸¿ø¼öÁ¤ ÆûÀ¸·Î ÀÌµ¿ ->
 	@PostMapping("/memberUpdateForm")
 	public ModelAndView memeberUpdateForm(String logId) {
 		ModelAndView mav = new ModelAndView();
@@ -195,7 +195,7 @@ public class MemberController {
 		return mav;
 	}
 
-	// íšŒì›ì •ë³´ ìˆ˜ì • -> 
+	// È¸¿øÁ¤º¸ ¼öÁ¤ -> 
 	@PostMapping("MemberUpdateOk")
 	public ModelAndView MemberUpdateOk(MemberDTO dto) {
 		int result = 0;
@@ -204,7 +204,7 @@ public class MemberController {
 			result = service.memberUpdate(dto);
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println("ìˆ˜ì •ì‹¤íŒ¨" + e.getMessage());
+			System.out.println("¼öÁ¤½ÇÆĞ" + e.getMessage());
 		}
 
 		ModelAndView mav = new ModelAndView();

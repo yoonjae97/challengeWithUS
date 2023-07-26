@@ -35,12 +35,14 @@
 				'MemberEmail':MemberEmail
 			},
 			method:'post',
-			url:'${pageContext.request.contextPath}/yj/findPwd',
+			url:'${pageContext.request.contextPath}/register/findPwd',
 			success:function(result){
 				if (result == 0) {
 					alert("입력하신 정보와 일치하는 회원이 없습니다")
+
 				} else {
 					alert("이메일로 비밀번호가 전송되었습니다.")
+					window.location.href = "${pageContext.request.contextPath}/home";
 				}
 			},
 			error:function(e){

@@ -23,6 +23,10 @@ public interface ChallengesService {
 
 	public int ChallengeDelete(int chalNo);
 
+	public int ChallengePartCheck(int chalNo, String logId);
+
+	public int ChallengePart(int chalNo, String logId);
+
 	
 
 }
