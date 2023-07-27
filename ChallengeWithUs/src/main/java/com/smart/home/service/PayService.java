@@ -2,6 +2,7 @@ package com.smart.home.service;
 
 import java.util.List;
 
+import com.smart.home.dto.DepositDTO;
 import com.smart.home.dto.PayDTO;
 
 public interface PayService {

@@ -324,8 +324,12 @@ CREATE SEQUENCE QAno_seq
 CREATE SEQUENCE QAFileNO_seq
     START WITH 1
     INCREMENT BY 1;            
-        
-        
+    
+CREATE SEQUENCE QACOMMENTNO_seq
+    START WITH 1
+    INCREMENT BY 1;        
+
+
 CREATE OR REPLACE TRIGGER trg_UpdateMemberAchievement
 BEFORE INSERT ON ChalParticipantLogs
 FOR EACH ROW
@@ -460,3 +464,26 @@ BEGIN
     comments        => 'Process challenge deposits job');
 END;
 /
+
+select c.chaltitle, c.chalcontent, c.ChalStatus, Round(m.AchievementRate,2), m.memberid
+from Challenges c join MemberAchievement m
+on c.chalno = m.chalno where m.memberid='yjkim';
+
+SELECT mem.memberid, mem.membergradename, mem.membername,
+		(SELECT COUNT(*)
+		FROM MEMBERACHIEVEMENT a
+		JOIN challenges c ON a.chalno =
+		c.chalno
+		WHERE a.memberId = mem.memberId
+		AND c.CHALENDDATE < SYSDATE
+		AND a.achievementrate >= 85
+		) AS achievementcount
+		FROM members mem
+		where memberid='yjkim';
+        
+        select c.chaltitle, c.chalcontent, c.ChalStatus,
+		Round(m.AchievementRate,2), m.memberid
+		from Challenges c join MemberAchievement m
+		on c.chalno = m.chalno where m.memberid='yjkim';
+        
+commit;

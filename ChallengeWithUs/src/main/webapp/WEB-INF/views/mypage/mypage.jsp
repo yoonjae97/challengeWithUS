@@ -8,15 +8,15 @@
 <div class="ChallengeBox-table">
   <div class="ChallengeBox1">
             <div class="WalletAmount"></div>
-            <div class="Title">나의 챌린지</div>
+            <div class="Title"><a href="/home/myPage/myChallenge">나의 챌린지</a></div>
         </div>
         <div class="ChallengeBox2">
             <div class="WalletAmount"></div>
-            <div class="Title"><a href="/home/account">예치금 관리</a></div>
+            <div class="Title"><a href="/home/myPage/myDeposit">예치금 관리</a></div>
         </div>
         <div class="ChallengeBox3">
             <div class="WalletAmount"></div>
-            <div class="Title">회원정보 수정</div>
+            <div class="Title"><a href="/home/myPage/myInfo">회원정보 수정</a></div>
         </div>
         <div class="ChallengeBox4">
             <div class="WalletAmount"></div>

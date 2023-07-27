@@ -38,7 +38,7 @@
 		select
 		MemberId, MemberName, MemberGender,
 		MemberPwd, MemberEmail, MemberTel,
-		MemberAddr, MemberBirth
+		MemberAddr, MemberBirth, memberdeposit
 		from members where memberid=#{param1}
 	</select>
 
