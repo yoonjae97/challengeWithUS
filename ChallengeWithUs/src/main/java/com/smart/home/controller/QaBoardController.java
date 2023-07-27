@@ -62,9 +62,11 @@ public class QaBoardController {
 	      // HttpSession -> Session만
 		   
 	  String path = request.getSession().getServletContext().getRealPath("/upload");
-	  System.out.println("path->" + path);
 	  
+	  System.out.println("path->" + path);
 	  System.out.println(dto.toString());
+	  dto.setMemberId((String)request.getSession().getAttribute("logId"));
+	  
 	  
 		//--------------------파일 업로드--------------------
 		//1. 파일 업로드를 위해서 request객체를 multipartRequest 객체로 형변환한다.
@@ -192,7 +194,7 @@ public class QaBoardController {
 	//자료실 글 수정하기
 	   @PostMapping("/qaBoardEditOk") //no, subject, content, filename, delFile
 	   public ModelAndView qaBoardEditOk(BoardDTO dto, HttpSession session, HttpServletRequest request) {
-	      
+		  dto.setMemberId((String)session.getAttribute("logId"));   
 	      //1. 기존에 업로드된 파일목록 DB에서 가져오기
 	      List<QaBoardFileDTO> orgFileList = service.qaboardfileSelect(dto.getQaNo());
 	      

@@ -25,6 +25,7 @@ public class ChallengeReplyController {
 	@ResponseBody
 	public String ChallengeReplyWrite(ChallengeReplyDTO dto, HttpSession session) {
 		dto.setMemberId((String)session.getAttribute("logId"));
+		System.out.println(dto.toString());
 		int result = service.ChallengeReplyInsert(dto);
 		return result+"";
 	}

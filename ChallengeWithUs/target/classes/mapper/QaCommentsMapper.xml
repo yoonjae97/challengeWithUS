@@ -5,7 +5,7 @@
  <mapper namespace = "com.smart.home.dao.QaCommentsDAO">
 	<insert id="qacommentsInsert">
 	    insert into qacomments(qacommentNo, qaNo, qacommentContent, qacommentDate)
-	    values(QACOMMENTNO_SEQ.nextval, ${qaNo}, #{qacommentContent}, sysdate)
+	    values(qacommentNo_seq.nextval, ${qaNo}, #{qacommentContent}, sysdate)
 	</insert>
 
  	<select id = "qacommentsSelect" resultType = "com.smart.home.dto.QaCommentsDTO">

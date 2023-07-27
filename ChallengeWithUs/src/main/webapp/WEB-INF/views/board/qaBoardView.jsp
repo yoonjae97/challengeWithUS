@@ -24,7 +24,7 @@
           $(qacommentsResult).each(function(i, qacommentContent) {
             var tag = "<li><div>";
             tag += "<b>" + qacommentContent.memberId + "(" + qacommentContent.qacommentDate + ")</b>";
-			
+            if("test"=='${logId}'){
             tag += "<input type='button' value='Edit'/>";
 			tag += "<input type='button' value='Del' title='"+qacommentContent.qacommentNo+"'/>";
 			tag += "<p>"+qacommentContent.qacommentContent+"</p></div>"; // 댓글내용	
@@ -40,7 +40,9 @@
 			
 			tag += "</form>";
 			tag += "</div>";
-			
+		}else{
+				tag += "<p>"+qacommentContent.qacommentContent+"</p></div>";
+			}			
 			
 			tag += "</li>";
 			
@@ -143,13 +145,21 @@
         </script>
 <main>
 	<h1>글 내용 보기</h1>
+	
 	<div>
 		<a href='/home/board/boardList?nowPage=${pDTO.nowPage}<c:if test="${pDTO.searchWord!=null}">&searchKey=${pDTO.searchKey }&searchWord=${pDTO.searchWord }</c:if>'>목록</a>
 		<hr/>
 	</div>
+	<c:if test="${logId==dto.memberId}">
+	<div>
+		<!-- session의 로그인아이디(logId)와 현재 글의 글쓴이(userId)가 같으면 수정, 삭제 표시한다. -->
+			<a href="/home/board/qaBoardEdit?no=${dto.qaNo}">수정</a>
+			<a href="javascript:delChk()">삭제</a>
+	</div>
+	</c:if>
 	<ul>
 		<li>글번호 : ${dto.qaNo}</li>
-		<li>글쓴이 : ${dto.memberId }</li>
+		<li>글쓴이 : ${dto.memberId}</li>
 		<li>조회수 : ${dto.qaHit}</li>
 		<li>등록일 : ${dto.qaDate}</li>
 		<li>제목 : ${dto.qaTitle}</li>
@@ -161,13 +171,7 @@
 			</c:forEach>
 		</li>
 	</ul>
-	<c:if test="${logId==dto.memberId}">
-	<div>
-		<!-- session의 로그인아이디(logId)와 현재 글의 글쓴이(userId)가 같으면 수정, 삭제 표시한다. -->
-			<a href="/home/board/qaBoardEdit?no=${dto.qaNo}">수정</a>
-			<a href="javascript:delChk()">삭제</a>
-	</div>
-	</c:if>
+
 	<!-- 댓글달기 -->
 	<style>
 		#qacomments{width:500px; height:80px;}
@@ -175,12 +179,14 @@
 	</style>
 	<div id = "qacomments">
 		<!-- 로그인 시 댓글 폼 -->
+		<c:if test="${logStatus=='Y'}">
 			<form method = "post" id = "qacommentsFrm">
-				<input type = "hidden" name = "no" value = "${dto.qaNo}"><!-- 원글번호 -->
+				<input type = "hidden" name = "qaNo" value = "${dto.qaNo}"><!-- 원글번호 -->
 				<!-- 오라클에서 comment가 예약어기 때문에 coment -->
 				<textarea name = "qacommentContent" id = "qacommentContent"></textarea>
 				<input type="submit" value="댓글 등록하기"/>
 			</form>
+		</c:if>
 		<hr/>
 		<ul id = "qacommentsList">
 

@@ -20,7 +20,7 @@
         </div>
         <div class="ChallengeBox4">
             <div class="WalletAmount"></div>
-            <div class="Title"><a href="/home/board">고객 문의</a></div>
+            <div class="Title"><a href="/home/board/boardList">고객 문의</a></div>
         </div>
 
 </div>
