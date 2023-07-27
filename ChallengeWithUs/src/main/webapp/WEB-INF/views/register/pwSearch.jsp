@@ -192,7 +192,7 @@
 			<input type="text" class="username-fill" placeholder="아이디를 입력해주세요" name="memberId" id="memberId"/>
 			<div class="element-2">이메일</div>
 			<div class="element-3">아이디</div>
-			<div class="element-4" onclick="location='FindID'">아이디 찾기</div>
+			<div class="element-4" onclick="location='/home/register/findIdForm'">아이디 찾기</div>
 			<div class="element-5">회원가입시 등록한 정보를 입력해주세요</div>
 			<div class="element-6">아이디가 기억나지 않는다면?</div>
 		</div>

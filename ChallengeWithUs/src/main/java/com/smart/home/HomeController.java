@@ -21,10 +21,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.smart.home.dto.ChallengesDTO;
-import com.smart.home.dto.ChallengesPagingDTO;
-import com.smart.home.service.ChallengesService;
-
 import com.google.cloud.vision.v1.AnnotateImageRequest;
 import com.google.cloud.vision.v1.AnnotateImageResponse;
 import com.google.cloud.vision.v1.BatchAnnotateImagesResponse;
@@ -40,7 +36,9 @@ import com.google.cloud.vision.v1.Symbol;
 import com.google.cloud.vision.v1.TextAnnotation;
 import com.google.cloud.vision.v1.Word;
 import com.google.protobuf.ByteString;
-import org.springframework.http.ResponseEntity;
+import com.smart.home.dto.ChallengesDTO;
+import com.smart.home.dto.ChallengesPagingDTO;
+import com.smart.home.service.ChallengesService;
 
 /**
  * Handles requests for the application home page.
@@ -50,25 +48,6 @@ public class HomeController {
 
 	@Autowired
 	ChallengesService service;
-
-//	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
-//	
-//	/**
-//	 * Simply selects the home view to render by returning its name.
-//	 */
-//	@RequestMapping(value = "/", method = RequestMethod.GET)
-//	public String home(Locale locale, Model model) {
-//		logger.info("Welcome home! The client locale is {}.", locale);
-//		
-//		Date date = new Date();
-//		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
-//		
-//		String formattedDate = dateFormat.format(date);
-//		
-//		model.addAttribute("serverTime", formattedDate );
-//		
-//		return "home";
-//	}
 
 	// 챌린지 리스트 조회
 	@GetMapping("")
@@ -476,93 +455,21 @@ public class HomeController {
 	}
 	
 	
-	
-	@GetMapping("/challenge")
-	public ModelAndView challenge() {
-
-		// ModelAndView
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("challenge/challengeView");
-
-		return mav;
-	}
-
-	@GetMapping("/mypage")
-	public ModelAndView mypage() {
-
-		// ModelAndView
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("mypage/mypage");
-
-		return mav;
-	}
-
-	@GetMapping("/board")
-	public ModelAndView board() {
-
-		// ModelAndView
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("board/boardView");
-
-		return mav;
-	}
-
+	  @GetMapping("/mypage") 
+	  public ModelAndView mypage() {
+	  
+	  ModelAndView mav = new ModelAndView();
+	  mav.setViewName("mypage/mypage");
+	  
+	  return mav; 
+	  }
+	 
 	@GetMapping("/challengeWrite")
 	public ModelAndView challengeWrite() {
 
 		// ModelAndView
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("challenge/challengeWrite");
-
-		return mav;
-	}
-
-	@GetMapping("/account")
-	public ModelAndView account() {
-
-		// ModelAndView
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("account/accountView");
-
-		return mav;
-	}
-
-	@GetMapping("/join")
-	public ModelAndView join() {
-
-		// ModelAndView
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("register/registerJoin");
-
-		return mav;
-	}
-
-	@GetMapping("/login")
-	public ModelAndView login() {
-
-		// ModelAndView
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("register/LoginPage");
-
-		return mav;
-	}
-
-	@GetMapping("/FindId")
-	public ModelAndView FindId() {
-
-		// ModelAndView
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("register/FindID");
-
-		return mav;
-	}
-
-	@GetMapping("/pwSearch")
-	public ModelAndView pwSearch() {
-
-		// ModelAndView
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("register/pwSearch");
 
 		return mav;
 	}
