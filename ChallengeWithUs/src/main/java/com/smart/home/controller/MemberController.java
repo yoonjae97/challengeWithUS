@@ -40,6 +40,19 @@ public class MemberController {
 		ModelAndView mav = new ModelAndView();
 		dto.setMemberAddr(dto.getZipcode(), dto.getZipcodeSub(), dto.getStreetAdr(), dto.getDetailAdr());
 		System.out.println(dto);
+		if(dto.getMemberGender()==null) {
+			dto.setMemberGender("");
+		}
+		if(dto.getMemberTel()==null) {
+			dto.setMemberTel("");
+		}
+		if(dto.getMemberAddr()==null) {
+			dto.setMemberAddr("", "", "", "");
+		}
+		if(dto.getMemberBirth()==null) {
+			dto.setMemberBirth("");
+		}
+		
 		try {
 			result = service.MemberInsert(dto);
 

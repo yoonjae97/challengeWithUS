@@ -15,45 +15,70 @@
 		if (alertMessage) {
 			alert(alertMessage);
 		}
+		
+		
 	});
 
-	function testChk() {
-		//빈칸유무 체크 
+
+	
+	
+	function submitForm() {
+		
+        let idJ = /^[a-z0-9][a-z0-9_\-]{4,19}$/;
+		let pwdCheck = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,25}$/;
+		let nameCheck = /^[가-힣a-zA-Z]+$/;
+		
 		if (document.getElementById("userid").value == "") {
 			alert("아이디를 입력하세요");
 			return false;
 		}
+		
+		if (document.getElementById("username").value == "") {
+			alert("이름을 입력하세요");
+			return false;
+		}
+		
 		if (document.getElementById("userpwd").value == "") {
 			alert("비밀번호를 입력하세요");
 			return false;
 		}
-		/*
-		나머지 빈칸 조건문 작성
-		 */
-		document.regForm.submit();
-	}
-
-	function doubleChk() {
-		var id = document.getElementById("userid").value;
-		$.ajax({
-			data : {
-				'id' : id
-			},
-			url : '${pageContext.request.contextPath}/register/doubleChk',
-			success : function(result) {
-				if (result == 1) {
-					alert("이미 사용중인 아이디입니다.");
-				} else {
-					alert("사용가능한 아이디입니다.");
-				}
-			},
-			error : function(e) {
-				console.log(e.responseText);
-			}
-		});
-	}
+		
+		if (document.getElementById("userpwdChk").value == "") {
+			alert("비밀번호 확인란를 입력하세요");
+			return false;
+		}
+		
+		if (document.getElementById("useremail").value == "") {
+			alert("이메일을 입력하세요");
+			return false;
+		}
 	
-	function submitForm() {
+		
+		if (document.getElementById("userpwd").value != document.getElementById("userpwdChk").value) {
+			alert("비밀번호와 비밀번호 확인란이 일치하지 않습니다.");
+			return false;
+		}
+		
+		if (!idJ.test(document.getElementById("userid").value)) {
+			alert("아이디는 5~20자의 영문 소문자, 숫자와 특수기호(_),(-)만 사용 가능합니다.");
+			return false;
+		}
+		
+		if (!pwdCheck.test(document.getElementById("userpwd").value)) {
+			alert("비밀번호는 영문자+숫자+특수문자 조합으로 8~25자리 사용해야 합니다.");
+			return false;
+		}
+		
+		if (!nameCheck.test(document.getElementById("username").value)) {
+			alert("이름에는 한글 및 영어만 사용가능합니다.");
+			return false;
+		} 
+		
+		if(document.getElementById("dochk").getAttribute("data-value") != "Y") {
+			alert("아이디 중복검사를 해주세요.")
+			return false;
+		}
+
 		  var formData = $("#regForm").serialize(); // 폼 데이터를 모두 수집하여 직렬화
 
 		  $.ajax({
@@ -129,18 +154,39 @@
 					}
 				}).open();
 	}
+	
+	function doubleChk() {
+		var id = document.getElementById("userid").value;
+		$.ajax({
+			data : {
+				'id' : id
+			},
+			url : '${pageContext.request.contextPath}/register/doubleChk',
+			success : function(result) {
+				if (result == 1) {
+					alert("이미 사용중인 아이디입니다.");
+				} else {
+					alert("사용가능한 아이디입니다.");
+					$("#dochk").attr("data-value", "Y");
+				}
+			},
+			error : function(e) {
+				console.log(e.responseText);
+			}
+		});
+	}
 </script>
 <main>
 	<form action="<%=request.getContextPath()%>/register/registerJoinOk"
 		method="post" id="regForm">
 		<div class="register-form">
 			<div class="sign_font">회원가입</div>
-			<input type="text" class="name" placeholder="이름" name="memberName">
-			<div class="name_text">이름</div>
+			<input type="text" class="name" placeholder="이름" name="memberName" id="username">
+			<div class="name_text" >이름</div>
 			<input type="text" class="phone" placeholder="연락처" name="memberTel">
 			<div class="phone_text">연락처</div>
 			<input type="email" class="email" placeholder="이메일"
-				name="memberEmail">
+				name="memberEmail" id="useremail">
 			<div class="email_text">이메일</div>
 			<input type="password" class="password" placeholder="비밀번호"
 				id="userpwd" name="memberPwd">
@@ -150,7 +196,7 @@
 			<input type="radio" class="radio2" value="남" name="memberGender">
 			<div class="male_font">남</div>
 			<div class="female_font">여</div>
-			<input type="password" class="confirm-password" placeholder="비밀번호 확인">
+			<input type="password" class="confirm-password" placeholder="비밀번호 확인" id="userpwdChk">
 			<div class="pwcon_text">비밀번호 확인</div>
 			<input type="text" class="birthday" placeholder="생년월일"
 				name="memberBirth">
@@ -158,8 +204,8 @@
 			<input type="text" class="id" placeholder="아이디" id="userid"
 				name="memberId">
 			<div class="id_text">아이디</div>
-			<div class="double-check" onclick="doubleChk()" id="doubleChk">
-				<div class="dochk">중복확인</div>
+			<div class="double-check" id="doubleChk" >
+				<div class="dochk" id="dochk" onclick="doubleChk()" data-value="N">중복확인</div>
 			</div>
 			<input type="text" id="sample6_postcode" class="postnum"
 				placeholder="우편번호" name="zipcode"> <input type="text"
@@ -172,7 +218,7 @@
 			<div class="find-address" onclick="sample6_execDaumPostcode()">
 				<div class="fadd_text">주소검색</div>
 			</div>
-			<div class="login-button" onclick="testChk()">
+			<div class="login-button" >
 				<button class="check_text" type="button" onclick="submitForm()">
 					확인
 					<!-- 					<div class="check_text">확인</div> -->
