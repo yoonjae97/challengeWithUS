@@ -192,5 +192,41 @@ public class MemberController {
 		return result;
 	}
 
+	// 회원수정 폼으로 이동 ->
+	@PostMapping("/memberUpdateForm")
+	public ModelAndView memeberUpdateForm(String logId) {
+		ModelAndView mav = new ModelAndView();
+		MemberDTO dto = null;
+		try {
+			dto = service.getMember(logId);
+			mav.addObject("dto", dto);
+			mav.setViewName("yj/memberUpdateForm");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		System.out.println(dto.toString());
+		return mav;
+	}
+
+	// 회원정보 수정 -> 
+	@PostMapping("MemberUpdateOk")
+	public ModelAndView MemberUpdateOk(MemberDTO dto) {
+		int result = 0;
+		System.out.println(dto);
+		try {
+			result = service.memberUpdate(dto);
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("수정실패" + e.getMessage());
+		}
+
+		ModelAndView mav = new ModelAndView();
+		if (result > 0) {
+			mav.setViewName("home");
+		} else {
+			mav.setViewName("yj/MemberResult");
+		}
+		return mav;
+	}
 
 }

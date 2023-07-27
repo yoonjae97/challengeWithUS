@@ -122,12 +122,6 @@
 	where memberid=#{param1}
 	</update>
 	
-	
-	<insert id="DepositTransactions">
-	insert into DepositTransactions values(DepositTransNo_seq.nextval, 
-	#{param1}, ${param2}, sysdate, '챌린지 참여', ${param3});
-	</insert>
-	
 	<select id="findLog" resultType="int">
 	select count(*) from ChalParticipantLogs
 	where memberid=#{param1} and TRUNC(ChalAuthDate) = TRUNC(SYSDATE)

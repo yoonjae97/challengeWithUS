@@ -96,7 +96,7 @@
       챌린지 인증 안내 
     </div>
   </div>
-   <hr />
+  <hr />
 		<c:if test="${logId == dto.memberId}">
 			<a
 				href="/home/ChallengeEdit?chalNo=${dto.chalNo}&nowPage=${pDTO.nowPage}">수정</a>
