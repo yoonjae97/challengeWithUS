@@ -1,0 +1,112 @@
+@charset "UTF-8";
+
+body{
+	margin: 0px;
+	width:100%; 
+	display:flex; 
+	flex-direction: column; 
+	align-content: center;
+	align-items: center; 
+}
+
+.ChargeContainer {
+  width: 669px;
+  height: 592px;
+  position: relative;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+	align-items: center; 
+  display: flex;
+  margin: 24px; 
+}
+
+.ChargeTitle {
+  width: 352px;
+  height: 87px;
+  text-align: center;
+  color: #3366FF;
+  font-size: 60px;
+  font-family: Noto Sans KR;
+  font-weight: 700;
+  word-wrap: break-word;
+}
+
+.Rectangle172 {
+  width: 669px;
+  height: 352px;
+  background: rgba(217, 217, 217, 0);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 20px;
+  border: 1.50px #1C43BE solid;
+}
+
+
+
+.Chargesaction {
+  width: 275px;
+  height: 147px;
+  left: 180px;
+  top: 200px;
+  position: absolute;
+}
+
+.ChargeAmount {
+  width: 275px;
+  height: 89.40px;
+  left: 0px;
+  top: 57.60px;
+  position: absolute;
+  text-align: center;
+  color: #4FD18B;
+  font-size: 60px;
+  font-family: Noto Sans KR;
+  font-weight: 900;
+  word-wrap: break-word;
+}
+
+.ChargeInfo {
+  width: 243px;
+  height: 58px;
+  left: 16px;
+  top: 0px;
+  position: absolute;
+  text-align: center;
+  color: #A1A0BD;
+  font-size: 25px;
+  font-family: Noto Sans KR;
+  font-weight: 700;
+  word-wrap: break-word;
+}
+
+.ChargeButton {
+  width: 352px;
+  height: 55px;
+  padding: 10px;
+  background: #3366FF;
+  border-radius: 20px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  display: inline-flex;
+  margin: 24px; 
+}
+
+.ButtonText {
+  color: white;
+  font-size: 25px;
+  font-family: Noto Sans KR;
+  font-weight: 700;
+  word-wrap: break-word;
+  border: 0;
+  background-color: transparent;
+}
+
+input{
+  width: 24px;
+  height: 24px;
+  padding: 5px;
+  border-radius: 12px;
+  
+}

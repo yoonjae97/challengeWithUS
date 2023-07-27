@@ -17,11 +17,8 @@
         FROM DepositTransactions
         WHERE MemberId = #{memberId}
     </select>
-    
-<!--     <insert id="chargeMyDeposit" parameterType="" resultType="int">
-    
-     
-    </insert> -->
+
     
 </mapper>
+
   

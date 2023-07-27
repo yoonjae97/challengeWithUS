@@ -17,6 +17,7 @@
 	<select id="GetPayList" resultType="com.smart.home.dto.PayDTO">
 		select * from DepositTransactions
 		where memberid=#{param1}
+		order by DepositPayDate desc
 	</select>
 	
 	<update id="MemberDepositUpdate">

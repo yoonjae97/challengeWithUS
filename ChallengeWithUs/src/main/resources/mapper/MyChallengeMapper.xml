@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.smart.home.dao.MyChallengeDAO">
+
+	<select resultType="com.smart.home.dto.MyChallengeCntDTO"
+		id="MyChallengeCnt">
+		SELECT mem.memberid, mem.membergradename, mem.membername,
+		(SELECT
+		COUNT(*)
+		FROM MEMBERACHIEVEMENT a
+		JOIN challenges c ON a.chalno =
+		c.chalno
+		WHERE a.memberId = mem.memberId
+		AND <![CDATA[c.CHALENDDATE < SYSDATE]]>
+		AND <![CDATA[a.achievementrate >= 85]]>
+		) AS achievementcount
+		FROM members mem
+		where memberid=#{param1}
+
+	</select>
+
+	<select resultType="com.smart.home.dto.MyChallengeDTO"
+		id="MyChallengeList">
+		select c.chaltitle, c.chalcontent, c.ChalStatus, c.chalfilename, c.chalno,
+		Round(m.AchievementRate,2) AchievementRate, m.memberid
+		from Challenges c join MemberAchievement m
+		on c.chalno = m.chalno where m.memberid=#{param1}
+	</select>
+</mapper>

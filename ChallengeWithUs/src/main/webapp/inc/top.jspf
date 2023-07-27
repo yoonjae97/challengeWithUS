@@ -10,6 +10,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/inc/styleNew.css" type="text/css"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
 </head>
 
 <nav>
@@ -20,10 +21,10 @@
                 <img class="line" alt="Line" src="<%= request.getContextPath() %>/imgs/line.png" />
             </div>
             <div class="element-wrapper">
-                <div class="element">회원가입</div>
+                <div class="element"><a href="/home/register/registerJoin">회원가입</a></div>
             </div>
             <div class="div-wrapper">
-                <div class="element">로그인</div>
+                <div class="element"><a href="/home/register/login">로그인</a></div>
             </div>
         </div>
         <div class="frame-wrapper">
@@ -32,6 +33,14 @@
                 <img class="img" alt="Line" src="<%= request.getContextPath() %>/imgs/under.png" />
             </div>
         </div>
-        <img class="logo" alt="Logo" src="<%= request.getContextPath() %>/imgs/logo.png" />
+        <a href="/home"><img class="logo" alt="Logo" src="<%= request.getContextPath() %>/imgs/logo.png" /></a>
     </div>
+    <c:if test="${logId==null }">
+    로그인중아님
+    </c:if>
+        <c:if test="${logId!=null }">
+                <div class="div-wrapper">
+                <div class="element"><a href="/home/register/logout">로그아웃</a></div>
+            </div>
+    </c:if>
 </nav>
