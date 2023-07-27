@@ -35,6 +35,10 @@ public interface ChallengesService {
 
 	public void UpdateDeposit(String logId, int memDeposit);
 
+	public int findLog(String string);
+
+	public void addLog(String logId, int chalNo);
+
 	
 
 }

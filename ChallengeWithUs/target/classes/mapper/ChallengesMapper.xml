@@ -121,4 +121,13 @@
 	update members set MemberDeposit=${param2}
 	where memberid=#{param1}
 	</update>
+	
+	<select id="findLog" resultType="int">
+	select count(*) from ChalParticipantLogs
+	where memberid=#{param1} and TRUNC(ChalAuthDate) = TRUNC(SYSDATE)
+	</select>
+	
+	<insert id="addLog">
+	insert into ChalParticipantLogs values(ChalAuthNo_seq.nextval, #{param1}, sysdate, ${param2})
+	</insert>
 </mapper>

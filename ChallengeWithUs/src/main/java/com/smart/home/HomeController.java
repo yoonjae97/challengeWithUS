@@ -116,48 +116,52 @@ public class HomeController {
 	@PostMapping("/ChallengeWriteOk")
 	@ResponseBody
 	public String ChallengeWriteOk(HttpServletRequest request,
-			@RequestParam(value = "challengeFilename", required = false) MultipartFile file, HttpSession session,
-			ChallengesDTO dto) {
-		dto.setMemberId((String) session.getAttribute("logId"));
-		String path = request.getSession().getServletContext().getRealPath("/upload");
+	        @RequestParam(value = "challengeFilename", required = false) MultipartFile file, HttpSession session,
+	        ChallengesDTO dto) {
+	    dto.setMemberId((String) session.getAttribute("logId"));
+	    String path = request.getSession().getServletContext().getRealPath("/upload");
+	    String orgFileName = file.getOriginalFilename();
 
-		String orgFileName = file.getOriginalFilename();
+	    // 파일이 업로드되지 않았을 경우
+	    if (file == null || file.isEmpty()) {
+	        dto.setChalFilename(""); // 파일명을 null로 설정하거나 기본값으로 설정 (DB에 null 허용 시)
+	    } else {
+	        File f = new File(path, orgFileName);
+	        if (f.exists()) {
+	            int point = orgFileName.lastIndexOf(".");
+	            String orgFile = orgFileName.substring(0, point);
+	            String orgExt = orgFileName.substring(point + 1);
 
-		File f = new File(path, orgFileName);
-		if (f.exists()) {
-			int point = orgFileName.lastIndexOf("."); // 5
-			String orgFile = orgFileName.substring(0, point);
-			String orgExt = orgFileName.substring(point + 1);
+	            for (int renameNum = 1;; renameNum++) { // 1,2,3,...
+	                String newFileName = orgFile + " (" + renameNum + ")." + orgExt;
+	                f = new File(path, newFileName);
+	                if (!f.exists()) {
+	                    orgFileName = newFileName;
+	                    break;
+	                }
+	            }
+	        }
+	        dto.setChalFilename(orgFileName);
 
-			for (int renameNum = 1;; renameNum++) { // 1,2,3,...
-				String newFileName = orgFile + " (" + renameNum + ")." + orgExt;
-				f = new File(path, newFileName);
-				if (!f.exists()) {
-					orgFileName = newFileName;
-					break;
-				}
-			}
-		}
-		dto.setChalFilename(orgFileName);
+	        try {
+	            file.transferTo(new File(path, orgFileName));
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }
+	    }
+	    
+	    int result = 0;
+	    try {
+	        result = service.ChallengeInsert(dto);
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
 
-		try {
-			file.transferTo(new File(path, orgFileName));
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		int result = 0;
-		try {
-			result = service.ChallengeInsert(dto);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		if (result > 0) {
-			return "success";
-		} else {
-			return "failure";
-		}
+	    if (result > 0) {
+	        return "success";
+	    } else {
+	        return "failure";
+	    }
 	}
 
 	@GetMapping("/ChallengeView")
@@ -225,8 +229,25 @@ public class HomeController {
 
 	@PostMapping("/imgCertify")
 	@ResponseBody
-	public String imgCertify(HttpSession session, @RequestParam("image") MultipartFile image) {
+	public String imgCertify(HttpSession session, @RequestParam("image") MultipartFile image, int chalNo, int randomCode) {
 		String result = null;
+		int cnt = 0;
+		String logId = (String)session.getAttribute("logId");
+		// 1차 로그인 여부 확인
+		if (logId==null || logId=="") {
+			return "noId";
+		}
+		// 챌린지 참가여부 확인
+		cnt = service.ChallengePartCheck(chalNo, logId);
+		if (cnt == 0) {
+			return "needPart";
+		}
+		// 오늘 인증 여부 확인
+		cnt = service.findLog(logId);
+		if (cnt > 0) {
+			return "already";
+		}
+		
 		try {
 			String path = session.getServletContext().getRealPath("/photo");
 
@@ -237,13 +258,23 @@ public class HomeController {
 
 			// detectHandwrittenOcr 메서드 호출하여 결과 반환
 			result = detectHandwrittenOcr(imagePath, System.out);
+			result = result.replaceAll(" ", "");
 
 		} catch (Exception e) {
 			System.out.println("fail");
 			e.printStackTrace();
 		}
-
-		return result;
+		
+		try {
+			if (Integer.parseInt(result) == randomCode) {
+				service.addLog(logId, chalNo);
+				return "success";
+			} 
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "fail";
+		
 	}
 
 	public static String detectHandwrittenOcr(String filePath, PrintStream out) throws Exception {
@@ -323,62 +354,89 @@ public class HomeController {
 	@PostMapping("/ChallengeEditOk")
 	@ResponseBody
 	public String challengeEditOk(HttpServletRequest request, @RequestParam(value="challengeFilename", required=false) MultipartFile file, HttpSession session, ChallengesDTO dto) {
-		int result = 0;
-		dto.setMemberId((String)session.getAttribute("logId"));
-		String path = request.getSession().getServletContext().getRealPath("/upload");
-		String orgFileName = file.getOriginalFilename();
-		String delFilename = service.ChallengeFileSelect(dto.getChalNo());
-		
-		// orgFileName(받아온 파일이름)과 delFilename(db에 있는 파일이름)이 같다면 저장할 필요없이 패스
-		// 다르다면 삭제 후 새로운 파일 저장
-		if (delFilename != null && delFilename != orgFileName) {
-			File delFile = new File(path, delFilename);
-			
-			if (delFile.exists()) {
-				fileDelete(path, delFilename);
-			}
-			
-			File f = new File(path, orgFileName);
-			if (f.exists()) {
-				int point = orgFileName.lastIndexOf("."); // 5
-				String orgFile = orgFileName.substring(0, point);
-				String orgExt = orgFileName.substring(point + 1);
-				
-				for (int renameNum = 1;; renameNum++) { // 1,2,3,...
-					String newFileName = orgFile + " (" + renameNum + ")." + orgExt;
-					f = new File(path, newFileName);
-					if (!f.exists()) {
-						orgFileName = newFileName;
-						break;
-					}
-				} 
-			}
-			dto.setChalFilename(orgFileName);
+	    int result = 0;
+	    dto.setMemberId((String) session.getAttribute("logId"));
+	    String path = request.getSession().getServletContext().getRealPath("/upload");
+	    String orgFileName = (file != null) ? file.getOriginalFilename() : null;
+	    String delFilename = service.ChallengeFileSelect(dto.getChalNo());
+	    System.out.println(orgFileName+"hi");
+	    // 기존 파일이 있는 경우
+	    if (delFilename != null && !delFilename.isEmpty()) {
+	        // 새 파일이 있는 경우, 기존 파일 삭제 후 새 파일 저장
+	        if (file != null && !file.isEmpty() && !delFilename.equals(orgFileName)) {
+	            fileDelete(path, delFilename);
 
-			try {
-				file.transferTo(new File(path, orgFileName));
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			
-		}
-		
-		
+	            File f = new File(path, orgFileName);
+	            if (f.exists()) {
+	                int point = orgFileName.lastIndexOf(".");
+	                String orgFile = orgFileName.substring(0, point);
+	                String orgExt = orgFileName.substring(point + 1);
 
-		
-		try {
-			result = service.ChallengeUpdate(dto);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+	                for (int renameNum = 1;; renameNum++) { // 1,2,3,...
+	                    String newFileName = orgFile + " (" + renameNum + ")." + orgExt;
+	                    f = new File(path, newFileName);
+	                    if (!f.exists()) {
+	                        orgFileName = newFileName;
+	                        break;
+	                    }
+	                } 
+	            }
+	            dto.setChalFilename(orgFileName);
 
-		if (result > 0) {
-	        return "success";
-	    } else {
-	        return "failure";
+	            try {
+	                file.transferTo(new File(path, orgFileName));
+	            } catch (Exception e) {
+	                e.printStackTrace();
+	            }
+	        }
+	        // 새 파일이 없는 경우, 기존 파일 유지
+	        else {
+	        	fileDelete(path, delFilename);
+	            dto.setChalFilename("");
+	        }
 	    }
-		
+	 // 기존 파일이 없는 경우
+	    else {
+	        // 새 파일이 있는 경우, 새 파일 저장
+	        if (file != null && !file.isEmpty()) {
+	            File f = new File(path, orgFileName);
+	            if (f.exists()) {
+	                int point = orgFileName.lastIndexOf(".");
+	                String orgFile = orgFileName.substring(0, point);
+	                String orgExt = orgFileName.substring(point + 1);
+
+	                for (int renameNum = 1;; renameNum++) { // 1,2,3,...
+	                    String newFileName = orgFile + " (" + renameNum + ")." + orgExt;
+	                    f = new File(path, newFileName);
+	                    if (!f.exists()) {
+	                        orgFileName = newFileName;
+	                        break;
+	                    }
+	                } 
+	            }
+	            dto.setChalFilename(orgFileName);
+
+	            try {
+	                file.transferTo(new File(path, orgFileName));
+	            } catch (Exception e) {
+	                e.printStackTrace();
+	            }
+	        }
+	        // 새 파일이 없는 경우, 아무 동작 없음
+	        else {
+	            dto.setChalFilename(""); // 또는 dto.setChalFilename("");
+	        }
+	    }
+	    System.out.println(dto.toString());
+	    try {
+	        result = service.ChallengeUpdate(dto);
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+
+	    return result > 0 ? "success" : "failure";
 	}
+	
 	
 	public void fileDelete(String path, String filename) {
 		try {
@@ -389,7 +447,33 @@ public class HomeController {
 		}
 	}
 	
-	
+	@GetMapping("/ChallengeDelete")
+	@ResponseBody
+	public String ChallengeDelete(HttpServletRequest request,  HttpSession session, int chalNo) {
+		int result = 0;
+		String path = request.getSession().getServletContext().getRealPath("/upload");
+
+		String delFilename = service.ChallengeFileSelect(chalNo);
+		if (delFilename != null) {
+			File delFile = new File(path, delFilename);
+			
+			if (delFile.exists()) {
+				fileDelete(path, delFilename);
+			}
+		}
+		
+		try {
+			result = service.ChallengeDelete(chalNo);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		if (result > 0) {
+	        return "success";
+	    } else {
+	        return "failure";
+	    }
+	}
 	
 	
 	

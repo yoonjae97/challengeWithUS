@@ -33,5 +33,9 @@ public interface ChallengesDAO {
 	public int GetDeposit(String logId);
 	
 	public void UpdateDeposit(String logId, int memDeposit);
+	
+	public int findLog(String string);
+	
+	public void addLog(String logId, int chalNo);
 
 }

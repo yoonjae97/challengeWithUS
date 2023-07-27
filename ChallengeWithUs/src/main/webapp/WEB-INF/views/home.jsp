@@ -70,13 +70,27 @@
 <c:forEach var="dto" items="${list}" varStatus="status">
 	<div class="ChallengeCard">
 		<div class="Fullcard">
-			<img class="Image2" src="<%=request.getContextPath()%>/imgs/card.jpg" />
+		<c:choose>
+				<c:when
+					test="${dto.chalFilename.endsWith('.jpg') || dto.chalFilename.endsWith('.png')}">
+					<img
+						class="Image2" src="<%=request.getContextPath()%>/upload/${dto.chalFilename}" />
+				</c:when>
+				<c:otherwise>
+					<img class="Image2" src="<%=request.getContextPath()%>/imgs/card.jpg" />
+				</c:otherwise>
+			</c:choose>
 			<div class="Content">
 				<div class="Title">${dto.chalTitle }</div>
 				<div class="Description">${dto.chalContent }</div>
 				<div class="Button">
 					<button><a href='/home/ChallengeView?chalNo=${dto.chalNo}&nowPage=${pDTO.nowPage}<c:if test="${pDTO.searchWord!=null}">
 				&searchKey=${pDTO.searchKey}&searchWord=${pDTO.searchWord}</c:if>'>GO</a></button>
+				<c:if test="${status.last}">
+				<script>
+                let lastNo = ${dto.chalNo}; // 마지막 DTO의 chalNo를 JavaScript 변수 lastNo에 저장
+            </script>
+			</c:if>
 				</div>
 			</div>
 		</div>

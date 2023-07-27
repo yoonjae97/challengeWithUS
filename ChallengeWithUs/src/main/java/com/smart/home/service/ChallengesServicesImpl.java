@@ -87,6 +87,17 @@ public class ChallengesServicesImpl implements ChallengesService {
 		
 	}
 
+	@Override
+	public int findLog(String string) {
+		return dao.findLog(string);
+	}
+
+	@Override
+	public void addLog(String logId, int chalNo) {
+		dao.addLog(logId, chalNo);
+		
+	}
+
 	
 
 }

@@ -16,12 +16,12 @@
 <div class="challenge-box">
 <form id="challengeEditForm">
 		<ul class="WriteBox">
+		<input type="hidden" name="chalNo" value="${dto.chalNo}" />
 			<li ><span>제목</span> <input class="box-title" type="text" name="chalTitle" id="" value="${dto.chalTitle}" /></li>
 			<li ><span>내용</span> <input class="box-title" type="text" name="chalContent" id="" value="${dto.chalContent}" /></li>
 			<li id="file"><span>대표 이미지 : <span>${dto.chalFilename }<b>삭제</b></span></span>
 			<input class="box-title" type="hidden" name="challengeFilename" id="" value=${dto.chalFilename }/>
 			</li>
-			<li ><span>대표 이미지</span> <button class="box-botton-text">이미지 선택</button> </li>
 			<li ><span>시작</span> <input class="box-title" type="date" name="chalstartDate" id="" value="${dto.chalstartDate.split(' ')[0]}"/></li>
 			<li ><span>종료 </span><input class="box-title" type="date" name="chalendDate" id="" value="${dto.chalendDate.split(' ')[0]}"/></li>
 			<li ><span>비용 </span><input class="box-title" type="text" name="chalFee" id="" value="${dto.chalFee}"/> 

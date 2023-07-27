@@ -45,33 +45,7 @@ public class ChallengesController {
 
 	
 	
-	@GetMapping("/ChallengeDelete")
-	@ResponseBody
-	public String ChallengeDelete(HttpServletRequest request,  HttpSession session, int chalNo) {
-		int result = 0;
-		String path = request.getSession().getServletContext().getRealPath("/upload");
-
-		String delFilename = service.ChallengeFileSelect(chalNo);
-		if (delFilename != null) {
-			File delFile = new File(path, delFilename);
-			
-			if (delFile.exists()) {
-				fileDelete(path, delFilename);
-			}
-		}
-		
-		try {
-			result = service.ChallengeDelete(chalNo);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-		if (result > 0) {
-	        return "success";
-	    } else {
-	        return "failure";
-	    }
-	}
+	
 }
 
 
