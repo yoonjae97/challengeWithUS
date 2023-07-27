@@ -18,10 +18,10 @@
         WHERE MemberId = #{memberId}
     </select>
     
-    <insert id="chargeMyDeposit" parameterType="" resultType="int">
+<!--     <insert id="chargeMyDeposit" parameterType="" resultType="int">
     
      
-    </insert>
+    </insert> -->
     
 </mapper>
   

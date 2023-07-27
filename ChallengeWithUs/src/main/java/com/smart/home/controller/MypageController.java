@@ -8,7 +8,7 @@ import com.smart.home.dto.ChallengeListDTO;
 import com.smart.home.dto.DepositDTO;
 import com.smart.home.dto.MemberAchievementDTO;
 import com.smart.home.dto.MemberDTO;
-import com.smart.home.dto.MemberGradeDTO;
+//import com.smart.home.dto.MemberGradeDTO;
 import com.smart.home.dto.QaDTO;
 
 import lombok.Data;
@@ -18,7 +18,7 @@ import com.smart.home.service.ChallengeService;
 import com.smart.home.service.DepositService;
 import com.smart.home.service.MemberAchievementService;
 import com.smart.home.service.MemberAchievementServiceImpl;
-import com.smart.home.service.MemberGradeServiceImpl;
+//import com.smart.home.service.MemberGradeServiceImpl;
 import com.smart.home.service.MemberService;
 
 import jdk.nashorn.internal.ir.RuntimeNode.Request;
@@ -151,24 +151,24 @@ public class MypageController {
         
 
     
-    
-    // 고객 문의 페이지로 이동 
-    @GetMapping("/Qa")
-    public ModelAndView getQaBoard(HttpServletRequest request) {
-    	// 1. 로그인 사용자의 아이디 (세션에서 받아오므로 따로 받아올 필요가 없다.)
-    	String memberId = gmifs(request);;
-        
-        // 2. 로그인 사용자의 문의 내역을 받아옵니다.
-        List<QaDTO> myQaList = Boservice.getMyQaList(memberId);
-        
-        // Model And view
-        ModelAndView mav = new ModelAndView();
-        
-        // 3. <고객 문의 게시판>에 보여질 QaNO, QaTitle, memberId, QaDate, QaHit
-        mav.addObject("memberId", memberId); // 로그인 사용자의 아이디
-        mav.addObject("myQaList", myQaList); // 문의 내역 리스트
-        
-        mav.setViewName("Mypage/Qa");
-        return mav;
-    }
+//    
+//    // 고객 문의 페이지로 이동 
+//    @GetMapping("/Qa")
+//    public ModelAndView getQaBoard(HttpServletRequest request) {
+//    	// 1. 로그인 사용자의 아이디 (세션에서 받아오므로 따로 받아올 필요가 없다.)
+//    	String memberId = gmifs(request);;
+//        
+//        // 2. 로그인 사용자의 문의 내역을 받아옵니다.
+//        List<QaDTO> myQaList = Boservice.getMyQaList(memberId);
+//        
+//        // Model And view
+//        ModelAndView mav = new ModelAndView();
+//        
+//        // 3. <고객 문의 게시판>에 보여질 QaNO, QaTitle, memberId, QaDate, QaHit
+//        mav.addObject("memberId", memberId); // 로그인 사용자의 아이디
+//        mav.addObject("myQaList", myQaList); // 문의 내역 리스트
+//        
+//        mav.setViewName("Mypage/Qa");
+//        return mav;
+//    }
 }
