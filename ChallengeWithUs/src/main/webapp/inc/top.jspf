@@ -21,10 +21,10 @@
                 <img class="line" alt="Line" src="<%= request.getContextPath() %>/imgs/line.png" />
             </div>
             <div class="element-wrapper">
-                <div class="element"><a href="/home/join">회원가입</a></div>
+                <div class="element"><a href="/home/register/registerJoin">회원가입</a></div>
             </div>
             <div class="div-wrapper">
-                <div class="element"><a href="/home/login">로그인</a></div>
+                <div class="element"><a href="/home/register/login">로그인</a></div>
             </div>
         </div>
         <div class="frame-wrapper">

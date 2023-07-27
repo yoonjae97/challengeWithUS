@@ -66,10 +66,10 @@
 					<div class="text-wrapper">비밀번호</div>
 					<div class="element-2">아이디</div>
 					<div class="element-3">
-						<a href="/home/FindId">아이디 찾기</a>
+						<a href="/home/register/findIdForm">아이디 찾기</a>
 					</div>
 					<div class="element-4">
-						<a href="/home/pwSearch">비밀번호 찾기</a>
+						<a href="/home/register/pwSearch">비밀번호 찾기</a>
 					</div>
 					<img class="line" alt="Line"
 						src="<%=request.getContextPath()%>/imgs/Line_15.png" />
