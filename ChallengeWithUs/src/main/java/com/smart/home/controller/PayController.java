@@ -16,7 +16,7 @@ import com.smart.home.dto.PayDTO;
 import com.smart.home.service.PayService;
 
 @Controller
-@RequestMapping("/yj")
+@RequestMapping("/pay")
 public class PayController {
 
 	@Autowired
@@ -24,7 +24,7 @@ public class PayController {
 
 	@GetMapping("/PayForm")
 	public String PayForm() {
-		return "yj/PayForm";
+		return "pay/PayForm";
 	}
 
 	@PostMapping("/PayRequest")

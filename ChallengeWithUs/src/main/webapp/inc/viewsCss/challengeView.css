@@ -324,6 +324,71 @@ body{
   word-wrap: break-word;
   color: #3366FF;
 }
+.CheckButton1 {
+   width: 100px; 
+   height: 40px; 
+   text-align: center; 
+   color: white; 
+   font-size: 18px; 
+   font-family: Noto Sans KR; 
+   font-weight: 700; 
+   padding: 10px; 
+   left: 930px; 
+   top: 0px; 
+   position: absolute; 
+   background: #4FD18B; 
+   border-radius: 20px; 
+   flex-direction: column; 
+   justify-content: center; 
+   align-items: center; 
+   gap: 10px; 
+   border: none;
+   display: inline-flex
+}
+
+.CheckButton2 {
+   width: 100px; 
+   height: 40px; 
+   text-align: center; 
+   color: white; 
+   font-size: 18px; 
+   font-family: Noto Sans KR; 
+   font-weight: 700; 
+   padding: 10px; 
+   left: 930px; 
+   top: 57px; 
+   position: absolute; 
+   background: #4FD18B; 
+   border-radius: 20px; 
+   flex-direction: column; 
+   justify-content: center; 
+   align-items: center; 
+   gap: 10px; 
+   border: none;
+   display: inline-flex
+}
+
+.CheckButton3 {
+   width: 100px; 
+   height: 40px; 
+   text-align: center; 
+   color: white; 
+   font-size: 18px; 
+   font-family: Noto Sans KR; 
+   font-weight: 700; 
+   padding: 10px; 
+   left: 1044px; 
+   top: 57px; 
+   position: absolute; 
+   background: #4FD18B; 
+   border-radius: 20px; 
+   flex-direction: column; 
+   justify-content: center; 
+   align-items: center; 
+   gap: 10px; 
+   border: none;
+   display: inline-flex
+}
 
 .instruction-heading {
   width: 408px;

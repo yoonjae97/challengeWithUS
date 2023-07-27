@@ -186,7 +186,6 @@ public class HomeController {
 			} else {
 				memDeposit -= chalFee;
 				service.UpdateDeposit(logId, memDeposit);
-				service.DepositTransactions(logId, -chalFee, memDeposit);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

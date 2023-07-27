@@ -1,48 +1,30 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<style>
-	.board_list, .page>ul{overflow:auto;}
-	.board_list>li {
-		list-style-type: none;
-		float:left;
-		height:40px;
-		line_height:40px;
-		border-bottom:1px solid #ddd;
-		width:15%;
-	}
-	
-	.board_list>li:nth-child(5n+2) {
-		width:30%;
-		/* 말줄임표시 */
-		white-space:nowrap;/* 줄바꾸지 않기 */
-		overflow:hidden;/* 넘친 값 숨기기 */
-		text-overflow:ellipsis;/* ... 표시하기 */
-	}	
+<link rel="stylesheet" href="${pageContext.request.contextPath}/inc/viewsCss/boardList.css" type="text/css"/>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700;900&display=swap" rel="stylesheet">
 
-	.page li {
-		float:left;
-		width:40px;
-		height:40px;
-		text-align:center;
-	}
-	.search{
-		text-align:center;
-	}
-</style>
+
 <main>
-	<h1>QA게시판 목록</h1>
-	<c:if test="${logId!=null}">
-		<div>
-			<a href="/home/board/qaBoardWrite">글쓰기</a>
-		</div>
-	</c:if>
-	<div>총 레코드 수 : ${pDTO.totalRecord }개</div>
+<div class="board-box">
+	<div class="board-title">
+    <div class="board-Ellipse5"></div>
+    <div class="board-center">
+      <div class="board-text">고객 문의</div>
+    </div>
+  </div>
+	
+	
+	
+	<div style="color:white;">총 레코드 수 : ${pDTO.totalRecord }개</div>
+	
 	<ul class="board_list">
-		<li>QA글번호</li>
-		<li>QA글제목</li>
-		<li>회원아이디</li>
-		<li>QA작성일</li>
-		<li>QA조회수</li>
+		<li>글번호</li>
+		<li>글제목</li>
+		<li>아이디</li>
+		<li>날짜</li>
+		<li>조회수</li>
 		<!--       변수       데이터(리스트)->modelandview에 설정한 변수 -->
 		<c:forEach var="dto" items="${list}">
 			<li>${dto.qaNo }</li>
@@ -53,6 +35,13 @@
 		</c:forEach>
 		
 	</ul>	
+	
+	<c:if test="${logId!=null}">
+		<div class="CheckButton">
+			<a class="ButtonText" href="/home/board/qaBoardWrite">글쓰기</a>
+		</div>
+	</c:if>
+	
 	<div class="page">
 		<ul>
 		<!-- 이전 페이지 -->
@@ -67,7 +56,7 @@
 		<c:forEach var = "p" begin = "${pDTO.startPageNum }" end ="${pDTO.startPageNum+pDTO.onePageNumCount-1}" step = "1">
 			<c:if test="${p<=pDTO.totalPage}"><!-- totalPage보다 큰 페이지 번호는 출력하지 않는다. -->
 				<c:if test="${p==pDTO.nowPage }">
-					<li style="background:yellow"><a href = '/home/board/boardList?nowPage=${p}<c:if test="${pDTO.searchWord!=null}">&searchKey=${pDTO.searchKey }&searchWord=${pDTO.searchWord }</c:if>'>${p}</a></li>
+					<li ><a href = '/home/board/boardList?nowPage=${p}<c:if test="${pDTO.searchWord!=null}">&searchKey=${pDTO.searchKey }&searchWord=${pDTO.searchWord }</c:if>'>${p}</a></li>
 				</c:if>
 				<c:if test = "${p!=pDTO.nowPage }">
 					<li><a href = '/home/board/boardList?nowPage=${p}<c:if test="${pDTO.searchWord!=null}">&searchKey=${pDTO.searchKey }&searchWord=${pDTO.searchWord }</c:if>'>${p}</a></li>
@@ -95,4 +84,6 @@
 			<input type = "submit" value = "Search"/>
 		</form>
 	</div>
+
+</div>
 </main>
