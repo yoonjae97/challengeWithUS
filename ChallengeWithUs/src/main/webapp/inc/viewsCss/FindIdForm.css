@@ -1,0 +1,108 @@
+@charset "UTF-8";
+
+
+
+.FindId-container {
+  width: 669px;
+  height: 592px;
+  position: relative;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  margin: 0 auto; 
+  padding:30px; 
+}
+
+.FindId-title {
+  width: 352px;
+  height: 87px;
+  text-align: center;
+  color: #3366FF;
+  font-size: 60px;
+  font-family: Noto Sans KR;
+  font-weight: 700;
+  word-wrap: break-word;
+  margin: 24px; 
+}
+
+.FindId-rectangle {
+  width: 669px;
+  height: 352px;
+  background: rgba(217, 217, 217, 0);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 20px;
+  border: 1.50px #1C43BE solid;
+}
+
+.FindId-saction{
+  width: 387px;
+  height: 138px;
+  position: absolute;
+  display:flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  flex-direction: column;
+  top:280px; 
+  
+}
+
+.FindId-id {
+  width: 275px;
+  height: 89.40px;
+  text-align: center;
+  color: #4FD18B;
+  font-size: 60px;
+  font-family: Noto Sans KR;
+  font-weight: 900;
+  word-wrap: break-word;
+}
+
+.FindId-message {
+  width: 387px;
+  height: 58px;
+  text-align: center;
+  color: #A1A0BD;
+  font-size: 25px;
+  font-family: Noto Sans KR;
+  font-weight: 700;
+  word-wrap: break-word;
+}
+
+
+
+.FindId-text {
+  color: white;
+  font-size: 25px;
+  font-family: Noto Sans KR;
+  font-weight: 700;
+  word-wrap: break-word;
+}
+
+
+.FindId-check{
+	width: 352px;
+  height: 55px;
+  padding: 10px;
+  background: #3366FF;
+  border-radius: 20px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  display: inline-flex;
+  margin: 24px;
+}
+
+button {
+	
+  
+  border: 0;
+  background-color: transparent;
+ 
+  	
+  	
+}
+
+

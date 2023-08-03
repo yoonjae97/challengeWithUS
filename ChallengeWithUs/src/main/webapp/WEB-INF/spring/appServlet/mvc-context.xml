@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
+      http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+      http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+	<!--로그인 시 자동으로 로그인 확인으로 이동하도록 만들기 -->
+	<!--interceptor 처리하기 -->
+	<!--1. beans태그에 namespace의 context, mvc를 추가 -->
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/mypage/**" />
+			<mvc:mapping path="/challengeWrite" />
+			<bean class="com.smart.home.LoginInterceptor"></bean>
+		</mvc:interceptor>
+	</mvc:interceptors>
+
+</beans>

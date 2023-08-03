@@ -1,0 +1,134 @@
+@charset "UTF-8";
+
+
+
+.board-box{
+	top: 50px; 
+	width: 1200px;
+  	height: 500px;
+  	margin: 24px;
+  	display:flex; 
+  	flex-direction: column; 
+  	margin: 0 auto;
+
+}
+
+
+.board-title {
+  width: 1200px;
+  height: 100px;
+  position: relative;
+  background: white;
+  box-shadow: 8px 13px 44px -6px #DFDBF6;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.board-Ellipse5 {
+  width: 309px;
+  height: 309px;
+  position: absolute;
+  top: -1px;
+  left: 450px;
+  background: rgba(79, 212, 139, 0.50);
+  border-radius: 9999px;
+}
+
+.board-center {
+  width: 247px;
+  height: 100px;
+  position: absolute;
+  top: -38px;
+  left: 481px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.board-text {
+  position: absolute; 
+  width: 312px;
+  top: 50px; 
+  text-align: center;
+  font-size: 50px;
+  font-family: 'Noto Sans KR', sans-serif;
+  font-weight: 700;
+  word-wrap: break-word;
+  color: black;
+}
+
+.board_list {
+	overflow:auto;
+	color: #A1A0BD; 
+	font-family: Noto Sans KR;
+	align-content: center;
+	justify-content: center;
+	align-items: center;
+	
+	
+	
+	}
+	
+.page>ul{
+	
+	color: #A1A0BD; 
+	font-family: Noto Sans KR;
+	align-content: center;
+	justify-content: center;
+	align-items: center;
+	display: flex;
+	list-style: none; 
+}
+	
+.board_list>li {
+		list-style-type: none;
+		float:left;
+		height:40px;
+		line_height:40px;
+		border-bottom:1px solid #A1A0BD;
+		width:15%;
+		
+	}
+	
+.board_list>li:nth-child(5n+2) {
+		width:30%;
+		/* 말줄임표시 */
+		white-space:nowrap;/* 줄바꾸지 않기 */
+		overflow:hidden;/* 넘친 값 숨기기 */
+		text-overflow:ellipsis;/* ... 표시하기 */
+	}	
+
+.page li {
+		float:left;
+		width:40px;
+		height:40px;
+		text-align:center;
+	}
+	
+.search{
+		text-align:center;
+	}
+	
+	
+.CheckButton {
+  width: 100px;
+  height: 40px;
+  background: #4FD18B;
+  border-radius: 20px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  display: inline-flex;
+}
+
+.ButtonText {
+  width: 47px;
+  text-align: center;
+  color: white;
+  font-size: 15px;
+  font-family: Noto Sans KR;
+  font-weight: 700;
+  word-wrap: break-word;
+}
