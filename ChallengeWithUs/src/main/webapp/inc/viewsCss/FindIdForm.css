@@ -2,23 +2,19 @@
 
 
 
-.ChargeContainer {
-	
+.FindId-container {
   width: 669px;
   height: 592px;
-  display:flex;
   position: relative;
   flex-direction: column;
   justify-content: center;
-  align-content: center;
-  align-items: center; 
+  align-items: center;
   display: flex;
-  margin: 0 auto;
-    
-   
+  margin: 0 auto; 
+  padding:30px; 
 }
 
-.ChargeTitle {
+.FindId-title {
   width: 352px;
   height: 87px;
   text-align: center;
@@ -27,9 +23,10 @@
   font-family: Noto Sans KR;
   font-weight: 700;
   word-wrap: break-word;
+  margin: 24px; 
 }
 
-.Rectangle172 {
+.FindId-rectangle {
   width: 669px;
   height: 352px;
   background: rgba(217, 217, 217, 0);
@@ -38,22 +35,22 @@
   border: 1.50px #1C43BE solid;
 }
 
-
-
-.Chargesaction {
-  width: 275px;
-  height: 147px;
-  left: 180px;
-  top: 200px;
+.FindId-saction{
+  width: 387px;
+  height: 138px;
   position: absolute;
+  display:flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  flex-direction: column;
+  top:280px; 
+  
 }
 
-.ChargeAmount {
+.FindId-id {
   width: 275px;
   height: 89.40px;
-  left: 0px;
-  top: 57.60px;
-  position: absolute;
   text-align: center;
   color: #4FD18B;
   font-size: 60px;
@@ -62,12 +59,9 @@
   word-wrap: break-word;
 }
 
-.ChargeInfo {
-  width: 243px;
+.FindId-message {
+  width: 387px;
   height: 58px;
-  left: 16px;
-  top: 0px;
-  position: absolute;
   text-align: center;
   color: #A1A0BD;
   font-size: 25px;
@@ -76,8 +70,19 @@
   word-wrap: break-word;
 }
 
-.ChargeButton {
-  width: 352px;
+
+
+.FindId-text {
+  color: white;
+  font-size: 25px;
+  font-family: Noto Sans KR;
+  font-weight: 700;
+  word-wrap: break-word;
+}
+
+
+.FindId-check{
+	width: 352px;
   height: 55px;
   padding: 10px;
   background: #3366FF;
@@ -87,23 +92,17 @@
   align-items: center;
   gap: 10px;
   display: inline-flex;
-  margin: 24px; 
+  margin: 24px;
 }
 
-.ButtonText {
-  color: white;
-  font-size: 25px;
-  font-family: Noto Sans KR;
-  font-weight: 700;
-  word-wrap: break-word;
+button {
+	
+  
   border: 0;
   background-color: transparent;
+ 
+  	
+  	
 }
 
-input{
-  width: 24px;
-  height: 24px;
-  padding: 5px;
-  border-radius: 12px;
-  
-}
+

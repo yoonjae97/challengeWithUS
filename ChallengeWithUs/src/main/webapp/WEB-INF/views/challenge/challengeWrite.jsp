@@ -19,7 +19,6 @@
 			<li ><span>제목</span> <input class="box-title" type="text" name="chalTitle" id=""/></li>
 			<li ><span>내용</span> <input class="box-title" type="text" name="chalContent" id=""/></li>
 			<li ><span>대표 이미지</span> <input class="box-title" type="file" name="challengeFilename" id=""/></li>
-			<li ><span>대표 이미지</span> <button class="box-botton-text">이미지 선택</button> </li>
 			<li ><span>시작</span> <input class="box-title" type="date" name="chalstartDate" id=""/></li>
 			<li ><span>종료 </span><input class="box-title" type="date" name="chalendDate" id=""/></li>
 			<li ><span>비용 </span><input class="box-title" type="text" name="chalFee" id=""/> 

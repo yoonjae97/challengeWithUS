@@ -34,7 +34,7 @@
 		<beans:property name="port" value="587" />
 		<beans:property name="username"
 			value="winterer601@naver.com" />
-		<beans:property name="password" value="dbswo601!19" />
+		<beans:property name="password" value="mistyone601!19" />
 		<beans:property name="defaultEncoding" value="UTF-8" />
 		<beans:property name="javaMailProperties">
 			<beans:props>
@@ -45,5 +45,6 @@
 			</beans:props>
 		</beans:property>
 	</beans:bean>	
-	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
-</beans:beans>
+	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />	
+	</beans:beans>
+	

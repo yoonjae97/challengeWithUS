@@ -12,6 +12,12 @@
                 max-width: 80%;
                 margin: 20px auto;
             }
+         
+         li{
+         	list-style: none; 
+         } 
+            
+  
  </style>
   <script>
  	// document가 로딩이 완료 되면 ready 이벤트에 의해서 호출된다.
@@ -46,7 +52,7 @@
  </script>
  
 <main>
-	<h1>QA 게시판</h1>
+
 	<form method="post" id="frm" action="/home/board/boardWriteOk" enctype="multipart/form-data">
 	<ul>
 		<li>제목</li>

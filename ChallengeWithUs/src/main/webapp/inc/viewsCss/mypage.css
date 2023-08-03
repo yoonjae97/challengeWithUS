@@ -2,12 +2,15 @@
 
 
 .ChallengeBox-table{
+	position:relative; 
+	top: 10px; 
+	left:200px; 
 	display: grid;
 	grid-template-columns: 500px 500px;
-	justify-content: center;
 	padding: 20px;
 	align-items: center;
-	justify-content: center;
+	margin: 0 auto;
+
 	
 
 	
@@ -36,9 +39,8 @@
     overflow: hidden;
     margin:50px; 
     padding: 20px; 
-    display: flex;
-    align-content: center;
     justify-content: center;
+    align-content: center;
     align-items: center;
    
 }
@@ -56,3 +58,6 @@
     
 }
 
+a{
+	text-decoration: none; 
+}

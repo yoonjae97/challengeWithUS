@@ -39,6 +39,8 @@ public interface ChallengesService {
 
 	public void addLog(String logId, int chalNo);
 
+	public void DepositTransactions(String logId, int i, int memDeposit);
+
 	
 
 }
