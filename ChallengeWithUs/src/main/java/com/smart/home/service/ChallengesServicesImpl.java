@@ -98,6 +98,12 @@ public class ChallengesServicesImpl implements ChallengesService {
 		
 	}
 
+	@Override
+	public void DepositTransactions(String logId, int i, int memDeposit) {
+		dao.DepositTransactions(logId, i, memDeposit);
+		
+	}
+
 	
 
 }

@@ -1,0 +1,62 @@
+@charset "UTF-8";
+
+.navigation {
+    width: 80px;
+    height: 40px;
+    padding: 10px;
+    background: #4FD18B;
+    border-radius: 20px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    display: inline-flex;
+}
+
+.nav-item {
+    width: 47px;
+    text-align: center;
+    color: white;
+    font-size: 18px;
+    font-family: Noto Sans KR;
+    font-weight: 700;
+    word-wrap: break-word;
+}
+
+.actions {
+    /* Styles for the actions section */
+}
+
+.header {
+    height: 89px;
+    left: 0px;
+    top: 94px;
+    position: absolute;
+    /* Styles for the header section */
+}
+
+.header-item {
+    /* Styles for each item in the header section */
+}
+
+.content {
+    width: 1175px;
+    height: 381px;
+    left: 11px;
+    top: 192px;
+    position: absolute;
+    /* Styles for the content section */
+}
+
+.content-text {
+    left: 34px;
+    top: 42px;
+    position: absolute;
+    color: black;
+    font-size: 25px;
+    font-family: Noto Sans KR;
+    font-weight: 400;
+    word-wrap: break-word;
+}
+
+/* Styles for the rest of the HTML content */

@@ -379,7 +379,7 @@ BEGIN
   )
   WHERE ChalNo = :NEW.ChalNo;
 END;
-
+drop procedure PROCESS_CHAL_DEPO_PROC;
 CREATE OR REPLACE PROCEDURE PROCESS_CHAL_DEPO_PROC AS
   v_chal_no Challenges.chalno%TYPE;
   v_chal_fee Challenges.chalfee%TYPE;
@@ -486,4 +486,9 @@ SELECT mem.memberid, mem.membergradename, mem.membername,
 		from Challenges c join MemberAchievement m
 		on c.chalno = m.chalno where m.memberid='yjkim';
         
+commit;
+select * from DepositTransactions;
+insert into DepositTransactions values(DepositTransNo_seq.nextval, 'yjkim', -5000, sysdate, '챌린지 참여', 110100);
+insert into DepositTransactions values(DepositTransNo_seq.nextval, 
+	#{param1}, ${param2}, sysdate, '챌린지 참여', ${param3});
 commit;

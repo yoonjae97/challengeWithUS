@@ -11,6 +11,15 @@ public class MemberDTO {
 	private String memberTel; // 楷遏贸
 	private String memberAddr; // 林家
 	private String memberBirth; // 积斥岿老
+	private int memberDeposit;
+
+	public int getMemberDeposit() {
+		return memberDeposit;
+	}
+
+	public void setMemberDeposit(int memberDeposit) {
+		this.memberDeposit = memberDeposit;
+	}
 
 	private String zipcodeSub;
 	public String getZipcodeSub() {

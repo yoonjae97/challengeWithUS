@@ -6,6 +6,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700;900&display=swap" rel="stylesheet">
 
 
+<div class="myChallengeConbox">
+
 <div class="myChallengebox">
   
     <div class="myChallengeEllipse5"></div>
@@ -77,5 +79,7 @@
 	  </div>
 </div>
 </c:forEach>
+
+</div>
 
 </div>

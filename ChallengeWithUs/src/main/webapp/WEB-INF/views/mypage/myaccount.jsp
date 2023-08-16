@@ -7,53 +7,44 @@
 	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700;900&display=swap"
 	rel="stylesheet">
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/inc/viewsCss/accountView.css"
+	href="${pageContext.request.contextPath}/inc/viewsCss/accountView.css?v=230728"
 	type="text/css" />
-<style>
-.deposit_list, .page>ul {
-	overflow: auto;
-}
 
-.deposit_list>li {
-	list-style-type: none;
-	float: left;
-	height: 40px;
-	line_height: 40px;
-	border-bottom: 1px solid #ddd;
-	width: 15%;
-}
+<main class="depositContain">
 
-.deposit_list>li:nth-child(5n+3) {
-	width: 30%;
-	/* 말줄임표시 */
-	white-space: nowrap; /* 줄바꾸지 않기 */
-	overflow: hidden; /* 넘친 값 숨기기 */
-	text-overflow: ellipsis; /* ... 표시하기 */
-}
-</style>
-<div class="deposit-management">
-	<div class="Ellipse5"></div>
-	<div class="center">
-		<div class="title">예치금 관리</div>
+	<div class="deposit-management">
+		<div class="Ellipse5"></div>
+		<div class="center">
+			<div class="title">예치금 관리</div>
+		</div>
 	</div>
-</div>
-<div></div>
+	<div></div>
 
-<div class="account-container">
-	<div class="account-LatestTransaction">
-		<div class="amount">${mdto.memberDeposit }</div>
-		<div class="type">예치금</div>
+	<div class="account-container">
+		<div class="account-LatestTransaction">
+			<div class="amount">${mdto.memberDeposit }</div>
+			<div class="type">예치금</div>
+		</div>
+		<div class="account-WalletAmount">
+			<div class="charge-text">
+				<a href="${pageContext.request.contextPath }/myPage/payForm">충전하기</a>
+			</div>
+			<div class="challenge-text">challenge with us</div>
+		</div>
+		<div class="account-Ellipse5"></div>
+		<div class="LeftSide">
+			<div class="username">${mdto.memberName }</div>
+		</div>
+
+
 	</div>
-	<div class="account-WalletAmount">
-		<div class="charge-text"><a href="${pageContext.request.contextPath }/myPage/payForm">충전하기</a></div>
-		<div class="challenge-text">challenge with us</div>
-	</div>
-	<div class="account-Ellipse5"></div>
-	<div class="LeftSide">
-		<div class="username">${mdto.memberName }</div>
-	</div>
-	<div>
-		<ul class="deposit_list">
+	
+	<div class="list-box">
+	<link rel="stylesheet"
+		href="${pageContext.request.contextPath}/inc/viewsCss/boardList.css"
+		type="text/css" />
+	<div class="board-box">
+		<ul class="board_list">
 			<li>회원아이디</li>
 			<li>결제금액</li>
 			<li>결제내용</li>
@@ -68,9 +59,6 @@
 			</c:forEach>
 		</ul>
 	</div>
+	</div>
 
-</div>
-
-
-
-
+</main>

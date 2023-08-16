@@ -23,7 +23,7 @@
 	width: 669px;
 }
 
-.login-light .login-button {
+.login-light .login-button button{
 	align-items: center;
 	background-color: #3366ff;
 	border-radius: 20px;
@@ -38,19 +38,25 @@
 	top: 212px;
 	width: 352px;
 	cursor: pointer;
-}
-
-.login-light .element {
 	color: #ffffff;
 	font-family: "Noto Sans KR-Bold", Helvetica;
 	font-size: 25px;
 	font-weight: 700;
 	letter-spacing: 0;
 	line-height: normal;
-	margin-top: -2.5px;
-	position: relative;
-	width: fit-content;
+	border:none;
 }
+
+.login-light .login-button button:hover {
+	background-color: #2650C0;
+}
+
+.login-light .login-button button:active {
+	background-color: #20409D; 
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4), inset 0 3px 10px
+		rgba(0, 0, 0, 0.6);
+}
+
 
 .login-light .password-fill {
 	border: 2px solid;
@@ -115,6 +121,7 @@
 	top: 290px;
 	white-space: nowrap;
 	width: 102px;
+	cursor:pointer;
 }
 
 .login-light .element-4 {
@@ -156,6 +163,8 @@
 	width: 212px;
 }
 
+
+
 @media (max-width: 400px) {
   .login-light {
     width: 100%;
@@ -163,3 +172,54 @@
     padding: 0;
   }
 }
+
+
+.login-light #idMsg {
+	display: none;
+	color: red;
+	font-size: 12px;
+	position: absolute;
+	width: 164px;
+	top: 5px;
+}
+
+.login-light #pwdMsg {
+	display: none;
+	color: red;
+	font-size: 12px;
+	position: absolute;
+	width: 164px;
+	top: 8em;
+}
+
+.login-light input:focus:invalid {
+	border: 1px solid red;
+}
+
+.login-light input.error:focus {
+	border: 1px solid red;
+}
+
+.login-light input.error+.error-message {
+	display: none;
+}
+
+.login-light input.error:invalid+.error-message {
+	display: block;
+	position: absolute;
+	left: 0;
+}
+
+.login-light .input-wrapper {
+	position: relative;
+}
+
+.login-light .error-wrapper {
+	position: relative;
+	display: flex;
+	left: 24%;
+	top: 6em;
+}
+
+
+

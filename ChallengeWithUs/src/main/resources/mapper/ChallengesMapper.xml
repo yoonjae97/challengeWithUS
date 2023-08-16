@@ -3,7 +3,8 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.smart.home.dao.ChallengesDAO">
-
+	
+	<!-- 챌린지 테이블 조회 쿼리 -->
 	<select id="ChallengesList"
 		resultType="com.smart.home.dto.ChallengesDTO">
 
@@ -22,6 +23,7 @@
 		WHERE <![CDATA[rownum <= ${nowPage * onePageRecord}]]>
 	</select>
 
+	<!-- 챌린지 테이블의 총 데이터 수 조회 쿼리 -->
 	<select id="ChallengesTotalRecord" resultType="int">
 		select count(chalno) cnt from challenges
 		<if test="searchWord!=null">
@@ -29,6 +31,8 @@
 		</if>
 	</select>
 
+	<!-- 더보기 버튼시 추가될 챌린지 리스트 조회 쿼리 -->
+	<!-- 구현은 했지만 웹에서는 추가가 되어있지 않습니다 -->
 	<select id="ChallengesListMore"
 		resultType="com.smart.home.dto.ChallengesDTO">
 
@@ -50,6 +54,7 @@
 
 	</select>
 
+	<!-- 챌린지 작성 쿼리-->
 	<insert id="ChallengeInsert"
 		parameterType="com.smart.home.dto.ChallengesDTO">
 		insert into challenges(chalno, memberid, chaltitle,
@@ -58,20 +63,23 @@
 		(chalno_seq.nextval, #{memberId}, #{chalTitle}, #{chalContent},
 		${chalFee}, #{chalstartDate}, #{chalendDate}, #{chalFilename})
 	</insert>
-
+	
+	<!-- 챌린지 번호를 통한 챌린지 정보 조회 쿼리 -->
 	<select id="ChallengeSelect"
 		resultType="com.smart.home.dto.ChallengesDTO">
 		select chalno, memberid, chaltitle, chalcontent,
 		ParticipantsCnt, chalstartdate, chalenddate, chalFee, chalFileName
 		from challenges where chalno=${param1}
 	</select>
-
+	
+	<!-- 해당 챌린지의 파일 조회 쿼리 -->
 	<select id="ChallengeFileSelect" resultType="String">
 		select chalfilename
 		from challenges
 		where chalno=${param1}
 	</select>
-
+	
+	<!-- 챌린지 정보 수정 쿼리 -->
 	<update id="ChallengeUpdate">
 		update challenges set
 		memberid=#{memberId},
@@ -83,50 +91,65 @@
 		chalFilename=#{chalFilename}
 		where chalno=#{chalNo}
 	</update>
-
+	
+	<!-- 챌린지 삭제 쿼리 -->
 	<delete id="ChallengeDelete">
 		delete from challenges
 		where chalNo=${param1}
 	</delete>
-
+	
+	<!-- 아이디와 챌린지 번호를 통해 챌린지 참가 여부 확인 쿼리 -->
 	<select id="ChallengePartCheck" resultType="int">
 		select count(*) from
 		MemberAchievement
 		where chalno=${param1} and memberid=#{param2}
 	</select>
-
+	
+	<!-- 챌린지 참가 신청 쿼리 -->
 	<insert id="ChallengePart">
 		insert into MemberAchievement
 		values(MemberAchievementNo_seq.nextval, #{param2}, ${param1}, 0)
 	</insert>
-
+	
+	<!-- 챌린지 참가 신청 완료시 해당 챌린지의 총 참가자 수와 상금 갱신 쿼리 -->
 	<update id="UpdateFeePartCnt">
 		update challenges set
 		ParticipantsCnt=ParticipantsCnt+1,
 		ChalTotalFee=ChalTotalFee+ChalFee
 		where chalno=${param1}
 	</update>
-
+	
+	<!-- 챌린지의 총 참가자 수 조회 쿼리 -->
 	<select id="GetParticipantsCnt" resultType="int">
 		select ParticipantsCnt from challenges
 		where chalno=${param1}
 	</select>
-
+	
+	<!-- 회원의 예치금 조회 쿼리 -->
 	<select id="GetDeposit" resultType="int">
 		select MemberDeposit from members
 		where memberid=#{logId}
 	</select>
 	
+	<!-- 회원의 예치금 갱신 쿼리 -->
 	<update id="UpdateDeposit">
 	update members set MemberDeposit=${param2}
 	where memberid=#{param1}
 	</update>
 	
+	<!-- 예치금 갱신 후 갱신 내역 예치금 관리 테이블에 저장 쿼리 -->
+	<insert id="DepositTransactions">
+	insert into DepositTransactions values(DepositTransNo_seq.nextval, 
+	#{param1}, ${param2}, sysdate, '챌린지 참여', ${param3})
+	</insert>
+	
+	<!-- 챌린지에 하루 한번만 인증할 수 있게 하기 위해 오늘 참가 여부 확인 쿼리 -->
 	<select id="findLog" resultType="int">
 	select count(*) from ChalParticipantLogs
 	where memberid=#{param1} and TRUNC(ChalAuthDate) = TRUNC(SYSDATE)
 	</select>
 	
+	<!-- 챌린지 참가 로그 추가 쿼리  -->
 	<insert id="addLog">
 	insert into ChalParticipantLogs values(ChalAuthNo_seq.nextval, #{param1}, sysdate, ${param2})
 	</insert>
