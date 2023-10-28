@@ -35,7 +35,7 @@
         // getter
 
         var IMP = window.IMP;
-        IMP.init('imp52436867');
+        IMP.init('');
         var money = $('input[name="cp_item"]:checked').val();
         
         IMP.request_pay({
